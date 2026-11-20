@@ -1,0 +1,127 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.8.1/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.1.0/Miniforge3-25.11.0-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.8.1/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0_kmax10_snap74/20261001T173128Z__ddaea2ab__2e53c8d
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0_kmax10_snap74/20261001T173138Z__82a4c1e2__2e53c8d
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0_kmax10_snap74/20261001T173148Z__765efb0e__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-sigma8_kmax10_snap74/20261001T173157Z__e8bbc726__2e53c8d
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-sigma8_kmax10_snap74/20261001T173206Z__311162f5__2e53c8d
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-sigma8_kmax10_snap74/20261001T173216Z__a6eb64b4__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T173225Z__b37a838e__2e53c8d
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T173234Z__d741c3c7__2e53c8d
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T173243Z__722bce8d__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-HubbleParam_kmax10_snap74/20261001T173253Z__3185535b__2e53c8d
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-HubbleParam_kmax10_snap74/20261001T173303Z__30a4199f__2e53c8d
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-HubbleParam_kmax10_snap74/20261001T173312Z__c7eb462e__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-n_s_kmax10_snap74/20261001T173322Z__ed28af42__2e53c8d
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-n_s_kmax10_snap74/20261001T173332Z__4f94d473__2e53c8d
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-n_s_kmax10_snap74/20261001T173341Z__f0fd6c78__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T173351Z__4957a05f__2e53c8d
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T173400Z__8a266d56__2e53c8d
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T173410Z__46da5db7__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0_kmax10_snap74/20261001T173419Z__91dc7900__2e53c8d
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0_kmax10_snap74/20261001T173428Z__9e1ce909__2e53c8d
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0_kmax10_snap74/20261001T173437Z__acbe734a__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-sigma8_kmax10_snap74/20261001T173447Z__ec4df1eb__2e53c8d
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-sigma8_kmax10_snap74/20261001T173457Z__6c2f1efa__2e53c8d
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-sigma8_kmax10_snap74/20261001T173506Z__1d36a1a3__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T173515Z__df1cc0e9__2e53c8d
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T173525Z__aa8b47e0__2e53c8d
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T173534Z__7115d1df__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-HubbleParam_kmax10_snap74/20261001T173543Z__9cc48267__2e53c8d
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-HubbleParam_kmax10_snap74/20261001T173552Z__fe072cc8__2e53c8d
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-HubbleParam_kmax10_snap74/20261001T173601Z__2638ff1a__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-n_s_kmax10_snap74/20261001T173611Z__ca271e02__2e53c8d
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-n_s_kmax10_snap74/20261001T173620Z__bf7c84ca__2e53c8d
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-n_s_kmax10_snap74/20261001T173628Z__abad9464__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T173639Z__66672dfb__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T173647Z__af042ac0__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T173657Z__65a8530a__2e53c8d
+seed 0 all                          rmse 0.0296
+Traceback (most recent call last):
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/ablate_cosmo_params.py", line 342, in <module>
+    main()
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/ablate_cosmo_params.py", line 338, in main
+    report(Path(args.out_dir) if args.out_dir else figure_dir("cosmo_ablation"))
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/ablate_cosmo_params.py", line 270, in report
+    r = _evaluate(arm, seed, ref)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/ablate_cosmo_params.py", line 158, in _evaluate
+    kept = _kept(arm)
+           ^^^^^^^^^^
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/ablate_cosmo_params.py", line 106, in _kept
+    return {"all": PARAMS, "none": ()}.get(arm) or ARMS[arm]
+                                                   ~~~~^^^^^
+KeyError: 'none'

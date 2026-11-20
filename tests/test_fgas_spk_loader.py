@@ -468,3 +468,78 @@ def test_param_subset_config_yaml_round_trip(tmp_path):
                        camels_param_names=["alpha"])
     back = L.DataConfig.from_yaml(cfg.to_yaml(tmp_path / "c.yaml"))
     assert back == cfg
+
+
+def test_radial_crop_refused_on_nonfixed_grid(tmp_path):
+    # A dataset stamped as having per-sim radii (e.g. the eighth-gen arcmin
+    # design) stores only a nominal radii_mpch, so a Mpc/h crop is refused;
+    # the full profile still loads.
+    path = S.save_dataset(
+        _make_dataset(True), project_root=tmp_path, suite="TEST", snapshot=74,
+        redshift=0.47, source="rhliu", tag="vg", stamp_param_names=False,
+        extra_meta={"radial_grid": {"design": "arcmin", "fixed_across_sims": False}},
+    )
+    with pytest.raises(ValueError, match="not fixed across simulations"):
+        L.load_training_data(L.DataConfig(path=str(path), radial_range_mpch=(0.5, 2.0)))
+    td = L.load_training_data(L.DataConfig(path=str(path)))
+    assert td.X.shape[1] == 6
+
+
+# --- radial_range_arcmin (arcmin-design datasets) ----------------------------
+
+def _save_arcmin(tmp_path, grid: dict, tag: str = "va") -> Path:
+    """Save the 6-radius test dataset stamped with an arcmin radial grid."""
+    return S.save_dataset(
+        _make_dataset(True), project_root=tmp_path, suite="TEST", snapshot=74,
+        redshift=0.47, source="rhliu", tag=tag, stamp_param_names=False,
+        extra_meta={"radial_grid": {"design": "arcmin", "fixed_across_sims": False, **grid}},
+    )
+
+
+# Bins 0-3 fixed in angle (1, 2, 4, 6 arcmin); bins 4-5 vary across sims.
+_GRID_ALL = {
+    "radii_arcmin_min": [1.0, 2.0, 4.0, 6.0, 7.6, 25.0],
+    "radii_arcmin_max": [1.0, 2.0, 4.0, 6.0, 7.8, 27.0],
+}
+
+
+def test_radial_range_arcmin_scalar_is_inclusive_upper_bound(tmp_path):
+    path = _save_arcmin(tmp_path, _GRID_ALL)
+    cfg = L.DataConfig(path=str(path), radial_range_arcmin=6)
+    assert cfg.radial_range_arcmin == (0.0, 6.0)
+    td = L.load_training_data(cfg)
+    full = L.load_training_data(L.DataConfig(path=str(path)))
+    assert td.X.shape[1] == 4            # 1, 2, 4 and 6 arcmin (6 included)
+    np.testing.assert_array_equal(td.X, full.X[:, :4])
+    assert full.X.shape[1] == 6          # null keeps every bin
+
+
+def test_radial_range_arcmin_pair_and_fixed_grid_stamp(tmp_path):
+    # An angle-fixed stamp (``radii_arcmin`` only), as on a pre-cut dataset.
+    path = _save_arcmin(tmp_path, {"radii_arcmin": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]})
+    td = L.load_training_data(L.DataConfig(path=str(path), radial_range_arcmin=[2, 4]))
+    assert td.X.shape[1] == 3
+    # A limit above every bin is a no-op.
+    assert L.load_training_data(
+        L.DataConfig(path=str(path), radial_range_arcmin=6)).X.shape[1] == 6
+
+
+def test_radial_range_arcmin_refuses_a_straddled_bin(tmp_path):
+    path = _save_arcmin(tmp_path, _GRID_ALL)
+    with pytest.raises(ValueError, match="cuts through bins \\[4\\]"):
+        L.load_training_data(L.DataConfig(path=str(path), radial_range_arcmin=7.7))
+
+
+def test_radial_range_arcmin_refused_without_arcmin_grid(tmp_path):
+    with pytest.raises(ValueError, match="arcmin-design dataset"):
+        L.load_training_data(L.DataConfig(path=str(_save(tmp_path)), radial_range_arcmin=6))
+
+
+@pytest.mark.parametrize("kw", [
+    {"radial_range_arcmin": -1},
+    {"radial_range_arcmin": (5, 2)},
+    {"radial_range_arcmin": 6, "radial_range_mpch": (0.0, 10.0)},
+])
+def test_radial_range_arcmin_config_validation(kw):
+    with pytest.raises(ValueError):
+        L.DataConfig(**kw)

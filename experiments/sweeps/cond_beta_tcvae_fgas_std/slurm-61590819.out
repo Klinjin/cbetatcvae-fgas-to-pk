@@ -1,0 +1,67 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.11.0/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.11.0/Miniforge3-26.9.4-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.11.0/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-16507d91be0dc1ce4f94c04d4d0430210b8685d9/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+{
+  "rows": 10240,
+  "sims": 1024,
+  "rows_per_snapshot": {
+    "74": 5120,
+    "82": 5120
+  },
+  "X_profile": 18,
+  "X_profile_definition": {
+    "columns": "9 x f_gas(R)/f_b (1--6 arcmin), then 9 x log10 sigma_fgas(R) on the same bins",
+    "sigma_fgas": "the dataset's fgas_std = the compiled file's prof_std (build_fgas_spk_from_compiled): |f_gas| * sqrt((sigma_ion/DS_ion)^2 + (sigma_tot/DS_tot)^2), f_gas = DS_ion/DS_tot/f_b, with sigma_* the halo-to-halo std of Delta Sigma_kSZ (ionised) and Delta Sigma_total over the selected halos x 3 projections (SimulationStacker test_CAMELS_eighth_gen.ipynb, _stack_ratio)",
+    "log10": "sigma_fgas is strictly positive and spans >1 dex across n and R; the model z-scores each column"
+  },
+  "X_cond": 2,
+  "X_params": 5,
+  "y_n_k": 79,
+  "param_names": [
+    "Omega0",
+    "sigma8",
+    "OmegaBaryon",
+    "HubbleParam",
+    "n_s"
+  ],
+  "x_cond": [
+    "log10_number_density",
+    "redshift"
+  ],
+  "log10_sigma_fgas_min_max": [
+    -1.2225433965081318,
+    1.2525894971590086
+  ]
+}
+Using CUDA device for Cvae.
+seed 0: 20261119T185848Z__650a611b__2e53c8d test RMSE 0.0347 best epoch 141
+Using CUDA device for Cvae.
+seed 1: 20261119T185943Z__dd7d24b6__2e53c8d test RMSE 0.0345 best epoch 162
+Using CUDA device for Cvae.
+seed 2: 20261119T190038Z__fca7ac84__2e53c8d test RMSE 0.0334 best epoch 55
+cond_beta_tcvae_fgas_std seed 0 20261119T185848Z__650a611b__2e53c8d test rmse 0.0347
+cond_beta_tcvae_fgas_std seed 1 20261119T185943Z__dd7d24b6__2e53c8d test rmse 0.0345
+cond_beta_tcvae_fgas_std seed 2 20261119T190038Z__fca7ac84__2e53c8d test rmse 0.0334
+cond_beta_tcvae seed 0 20261118T213218Z__f0f8a8da__2e53c8d test rmse 0.0384
+cond_beta_tcvae seed 1 20261118T213311Z__cf69de63__2e53c8d test rmse 0.0392
+cond_beta_tcvae seed 2 20261118T213404Z__52e49810__2e53c8d test rmse 0.0364
+joint_cvae_fgas_std seed 0 20261118T072522Z__42687b7e__2e53c8d test rmse 0.0344
+joint_cvae_fgas_std seed 1 20261118T072558Z__0e094184__2e53c8d test rmse 0.0348
+joint_cvae_fgas_std seed 2 20261118T072630Z__59e22929__2e53c8d test rmse 0.0343
+| tracer | n [(Mpc/h)⁻³] | all k cond. β-TCVAE, [f_gas, log10 σ_fgas] (z=μ_p) | all k its baseline ŷ | all k cond. β-TCVAE, f_gas only (z=μ_p) | all k joint cVAE, [f_gas, log10 σ_fgas] | k∈(0,1] cond. β-TCVAE, [f_gas, log10 σ_fgas] (z=μ_p) | k∈(0,1] its baseline ŷ | k∈(0,1] cond. β-TCVAE, f_gas only (z=μ_p) | k∈(0,1] joint cVAE, [f_gas, log10 σ_fgas] | k∈(1,3] cond. β-TCVAE, [f_gas, log10 σ_fgas] (z=μ_p) | k∈(1,3] its baseline ŷ | k∈(1,3] cond. β-TCVAE, f_gas only (z=μ_p) | k∈(1,3] joint cVAE, [f_gas, log10 σ_fgas] | k∈(3,10] cond. β-TCVAE, [f_gas, log10 σ_fgas] (z=μ_p) | k∈(3,10] its baseline ŷ | k∈(3,10] cond. β-TCVAE, f_gas only (z=μ_p) | k∈(3,10] joint cVAE, [f_gas, log10 σ_fgas] |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| DESI LRG | 0.0001 | 0.0322 ± 0.0013 | 0.0324 ± 0.0015 | 0.0327 ± 0.0014 | 0.0302 ± 0.0007 | 0.0052 ± 0.0005 | 0.0056 ± 0.0003 | 0.0046 ± 0.0002 | 0.0055 ± 0.0001 | 0.0201 ± 0.0019 | 0.0197 ± 0.0011 | 0.0195 ± 0.0007 | 0.0194 ± 0.0005 | 0.0366 ± 0.0013 | 0.0370 ± 0.0017 | 0.0374 ± 0.0017 | 0.0343 ± 0.0008 |
+| DESI LRG | 0.00028 | 0.0265 ± 0.0013 | 0.0272 ± 0.0019 | 0.0287 ± 0.0020 | 0.0243 ± 0.0005 | 0.0050 ± 0.0006 | 0.0053 ± 0.0003 | 0.0046 ± 0.0003 | 0.0052 ± 0.0000 | 0.0181 ± 0.0019 | 0.0180 ± 0.0013 | 0.0180 ± 0.0019 | 0.0168 ± 0.0008 | 0.0299 ± 0.0013 | 0.0308 ± 0.0022 | 0.0327 ± 0.0024 | 0.0274 ± 0.0005 |
+| DESI LRG | 0.0005 | 0.0259 ± 0.0008 | 0.0267 ± 0.0016 | 0.0285 ± 0.0025 | 0.0243 ± 0.0004 | 0.0052 ± 0.0005 | 0.0055 ± 0.0002 | 0.0047 ± 0.0003 | 0.0054 ± 0.0001 | 0.0186 ± 0.0015 | 0.0186 ± 0.0013 | 0.0187 ± 0.0022 | 0.0175 ± 0.0007 | 0.0290 ± 0.0008 | 0.0301 ± 0.0019 | 0.0323 ± 0.0028 | 0.0272 ± 0.0004 |
+| DESI LRG | 0.001 | 0.0254 ± 0.0010 | 0.0261 ± 0.0017 | 0.0276 ± 0.0024 | 0.0248 ± 0.0002 | 0.0054 ± 0.0004 | 0.0058 ± 0.0002 | 0.0052 ± 0.0004 | 0.0057 ± 0.0001 | 0.0194 ± 0.0007 | 0.0196 ± 0.0011 | 0.0198 ± 0.0024 | 0.0188 ± 0.0006 | 0.0282 ± 0.0012 | 0.0291 ± 0.0019 | 0.0309 ± 0.0026 | 0.0276 ± 0.0002 |
+| DESI LRG | 0.0024 | 0.0259 ± 0.0021 | 0.0265 ± 0.0026 | 0.0277 ± 0.0016 | 0.0257 ± 0.0008 | 0.0058 ± 0.0003 | 0.0063 ± 0.0001 | 0.0059 ± 0.0003 | 0.0059 ± 0.0001 | 0.0205 ± 0.0006 | 0.0208 ± 0.0011 | 0.0220 ± 0.0016 | 0.0198 ± 0.0009 | 0.0287 ± 0.0026 | 0.0293 ± 0.0031 | 0.0306 ± 0.0017 | 0.0286 ± 0.0009 |
+| DESI BGS | 0.001 | 0.0395 ± 0.0016 | 0.0385 ± 0.0008 | 0.0394 ± 0.0018 | 0.0409 ± 0.0003 | 0.0060 ± 0.0004 | 0.0063 ± 0.0004 | 0.0058 ± 0.0002 | 0.0073 ± 0.0002 | 0.0247 ± 0.0015 | 0.0239 ± 0.0007 | 0.0236 ± 0.0011 | 0.0265 ± 0.0001 | 0.0449 ± 0.0018 | 0.0438 ± 0.0010 | 0.0450 ± 0.0021 | 0.0464 ± 0.0004 |
+| DESI BGS | 0.004 | 0.0368 ± 0.0018 | 0.0363 ± 0.0022 | 0.0388 ± 0.0014 | 0.0386 ± 0.0005 | 0.0070 ± 0.0005 | 0.0072 ± 0.0005 | 0.0074 ± 0.0002 | 0.0082 ± 0.0004 | 0.0256 ± 0.0011 | 0.0252 ± 0.0008 | 0.0275 ± 0.0009 | 0.0275 ± 0.0001 | 0.0415 ± 0.0024 | 0.0408 ± 0.0029 | 0.0436 ± 0.0016 | 0.0433 ± 0.0006 |
+| DESI BGS | 0.008 | 0.0384 ± 0.0018 | 0.0381 ± 0.0021 | 0.0426 ± 0.0025 | 0.0396 ± 0.0010 | 0.0082 ± 0.0002 | 0.0083 ± 0.0002 | 0.0089 ± 0.0004 | 0.0089 ± 0.0005 | 0.0288 ± 0.0003 | 0.0284 ± 0.0007 | 0.0324 ± 0.0014 | 0.0294 ± 0.0007 | 0.0429 ± 0.0023 | 0.0425 ± 0.0026 | 0.0475 ± 0.0030 | 0.0443 ± 0.0011 |
+| DESI BGS | 0.02 | 0.0409 ± 0.0014 | 0.0408 ± 0.0018 | 0.0504 ± 0.0024 | 0.0423 ± 0.0009 | 0.0096 ± 0.0002 | 0.0097 ± 0.0002 | 0.0102 ± 0.0004 | 0.0103 ± 0.0005 | 0.0325 ± 0.0008 | 0.0326 ± 0.0013 | 0.0381 ± 0.0015 | 0.0340 ± 0.0010 | 0.0452 ± 0.0016 | 0.0451 ± 0.0020 | 0.0562 ± 0.0027 | 0.0467 ± 0.0009 |
+| DESI BGS | 0.03 | 0.0435 ± 0.0019 | 0.0434 ± 0.0024 | 0.0524 ± 0.0028 | 0.0449 ± 0.0005 | 0.0101 ± 0.0002 | 0.0101 ± 0.0003 | 0.0106 ± 0.0005 | 0.0110 ± 0.0004 | 0.0343 ± 0.0008 | 0.0345 ± 0.0014 | 0.0394 ± 0.0022 | 0.0366 ± 0.0010 | 0.0481 ± 0.0023 | 0.0480 ± 0.0028 | 0.0585 ± 0.0032 | 0.0495 ± 0.0005 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-19/cond_beta_tcvae_fgas_std/cond_beta_tcvae_fgas_std_rmse_vs_k.png
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-19/cond_beta_tcvae_fgas_std/cond_beta_tcvae_fgas_std_history_terms.png
+seed 0: diagnostics written for 20261119T185848Z__650a611b__2e53c8d
+seed 1: diagnostics written for 20261119T185943Z__dd7d24b6__2e53c8d
+seed 2: diagnostics written for 20261119T190038Z__fca7ac84__2e53c8d

@@ -1,0 +1,39 @@
+# config_eighth_gen_compiled_snap82_mpch_9bins_noparams.yaml with the target restricted to k in [0, 10] h/Mpc (scripts/kmax10_noparams.py).
+# A/B arm (no cosmology): identical to config_eighth_gen_compiled_snap82_mpch_9bins.yaml except include_camels_params: false (f_gas profile only).
+# A/B (radial design, matched bin count) arm mpch9: 9 innermost comoving bins (0.1 -- 2.678 Mpc/h) to match the 9-bin arcmin arm (config_eighth_gen_compiled_snap82_arcmin_le6.yaml).
+# DataConfig: eighth-gen snap82 dataset (tag 20260930) built DIRECTLY from the
+# producer's compiled f_gas files
+#   DeltaSigma_kSZ_over_DeltaSigma_total_profiles_snap82_nd_*_n_*_eighth_gen.npz
+# (comoving Mpc/h design, halos ranked by saved stellar mass at production) by
+# scripts/build_dataset_eighth_gen_compiled.py.
+#
+# number_density_indices [2] -> n = 8.0e-3 (Mpc/h)^-3, 1000 halos (snap82 bins).
+# Target: full SP(k) curve, 255 bins 0.178 -- 32.1 h/Mpc (Pk_512_3Dfield grid).
+# Caveat (CLAUDE.md): SP(k) = P_total/P_DM within the hydro run is a proxy that
+# biases at k >~ 5 h/Mpc in a feedback-correlated way.
+#
+#     python scripts/run.py --config-data scripts/configs/data/config_eighth_gen_compiled_snap82.yaml \
+#                           --config-run  scripts/configs/run/cvae_noise.yaml
+
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 82
+redshift: 0.21
+source: lindajin
+rank: mstar
+tag: '20260930'
+sim_ids: null
+
+number_density_indices: [2]
+radial_range_mpch: [0.0, 2.7]   # 9 innermost bins, 0.1 -- 2.678 Mpc/h
+radial_range_arcmin: null   # arcmin-design datasets only: 6 = bins <= 6 arcmin (9 bins); null = all bins
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: false
+camels_param_indices: null
+camels_param_names: null
+
+target_mode: k_range
+k_target: null
+k_range: [0.0, 10.0]

@@ -1,0 +1,87 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.8.1/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.1.0/Miniforge3-25.11.0-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.8.1/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-f_b /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-f_b_kmax10_snap74/20261003T175541Z__8d087c70__2e53c8d
+only-f_b /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-f_b_kmax10_snap74/20261003T175551Z__aa20d597__2e53c8d
+only-f_b /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-f_b_kmax10_snap74/20261003T175600Z__3403298b__2e53c8d
+seed 0 all                          rmse 0.0296
+seed 0 none                         rmse 0.0641
+seed 0 drop-Omega0                  rmse 0.0557
+seed 0 drop-sigma8                  rmse 0.0288
+seed 0 drop-OmegaBaryon             rmse 0.0434
+seed 0 drop-HubbleParam             rmse 0.0274
+seed 0 drop-n_s                     rmse 0.0295
+seed 0 drop-Omega0+OmegaBaryon      rmse 0.0594
+seed 0 only-Omega0                  rmse 0.0433
+seed 0 only-sigma8                  rmse 0.0610
+seed 0 only-OmegaBaryon             rmse 0.0601
+seed 0 only-HubbleParam             rmse 0.0619
+seed 0 only-n_s                     rmse 0.0611
+seed 0 only-Omega0+OmegaBaryon      rmse 0.0295
+seed 0 only-f_b                     rmse 0.0265
+seed 1 all                          rmse 0.0261
+seed 1 none                         rmse 0.0672
+seed 1 drop-Omega0                  rmse 0.0546
+seed 1 drop-sigma8                  rmse 0.0277
+seed 1 drop-OmegaBaryon             rmse 0.0437
+seed 1 drop-HubbleParam             rmse 0.0263
+seed 1 drop-n_s                     rmse 0.0279
+seed 1 drop-Omega0+OmegaBaryon      rmse 0.0627
+seed 1 only-Omega0                  rmse 0.0440
+seed 1 only-sigma8                  rmse 0.0607
+seed 1 only-OmegaBaryon             rmse 0.0587
+seed 1 only-HubbleParam             rmse 0.0617
+seed 1 only-n_s                     rmse 0.0609
+seed 1 only-Omega0+OmegaBaryon      rmse 0.0273
+seed 1 only-f_b                     rmse 0.0259
+seed 2 all                          rmse 0.0268
+seed 2 none                         rmse 0.0638
+seed 2 drop-Omega0                  rmse 0.0572
+seed 2 drop-sigma8                  rmse 0.0282
+seed 2 drop-OmegaBaryon             rmse 0.0454
+seed 2 drop-HubbleParam             rmse 0.0272
+seed 2 drop-n_s                     rmse 0.0274
+seed 2 drop-Omega0+OmegaBaryon      rmse 0.0609
+seed 2 only-Omega0                  rmse 0.0443
+seed 2 only-sigma8                  rmse 0.0623
+seed 2 only-OmegaBaryon             rmse 0.0601
+seed 2 only-HubbleParam             rmse 0.0637
+seed 2 only-n_s                     rmse 0.0627
+seed 2 only-Omega0+OmegaBaryon      rmse 0.0272
+seed 2 only-f_b                     rmse 0.0282
+| arm | conditioning | RMSE (all k) | RMSE k∈(0,1] | RMSE k∈(1,3] | RMSE k∈(3,10] | median_k RMSE(k) | frac k: RMSE<1% | recovered |
+|---|---|---|---|---|---|---|---|---|
+| all | Omega0, sigma8, OmegaBaryon, HubbleParam, n_s | 0.0275 ± 0.0019 | 0.0060 ± 0.0002 | 0.0210 ± 0.0007 | 0.0306 ± 0.0023 | 0.0268 ± 0.0017 | 0.0759 ± 0.0000 | 1.00 |
+| none | — | 0.0650 ± 0.0019 | 0.0110 ± 0.0005 | 0.0456 ± 0.0021 | 0.0732 ± 0.0020 | 0.0700 ± 0.0024 | 0.0506 ± 0.0000 | 0.00 |
+| drop-Omega0 | sigma8, OmegaBaryon, HubbleParam, n_s | 0.0558 ± 0.0013 | 0.0090 ± 0.0003 | 0.0399 ± 0.0008 | 0.0627 ± 0.0015 | 0.0604 ± 0.0014 | 0.0633 ± 0.0000 | 0.24 |
+| drop-sigma8 | Omega0, OmegaBaryon, HubbleParam, n_s | 0.0282 ± 0.0006 | 0.0061 ± 0.0001 | 0.0201 ± 0.0004 | 0.0317 ± 0.0007 | 0.0269 ± 0.0008 | 0.0759 ± 0.0000 | 0.98 |
+| drop-OmegaBaryon | Omega0, sigma8, HubbleParam, n_s | 0.0442 ± 0.0011 | 0.0083 ± 0.0002 | 0.0321 ± 0.0009 | 0.0495 ± 0.0012 | 0.0454 ± 0.0009 | 0.0633 ± 0.0000 | 0.56 |
+| drop-HubbleParam | Omega0, sigma8, OmegaBaryon, n_s | 0.0270 ± 0.0006 | 0.0059 ± 0.0001 | 0.0200 ± 0.0002 | 0.0301 ± 0.0007 | 0.0255 ± 0.0001 | 0.0759 ± 0.0000 | 1.01 |
+| drop-n_s | Omega0, sigma8, OmegaBaryon, HubbleParam | 0.0283 ± 0.0011 | 0.0061 ± 0.0002 | 0.0208 ± 0.0009 | 0.0316 ± 0.0013 | 0.0268 ± 0.0010 | 0.0759 ± 0.0000 | 0.98 |
+| drop-Omega0+OmegaBaryon | sigma8, HubbleParam, n_s | 0.0610 ± 0.0016 | 0.0102 ± 0.0006 | 0.0434 ± 0.0023 | 0.0685 ± 0.0016 | 0.0650 ± 0.0025 | 0.0549 ± 0.0073 | 0.11 |
+| only-Omega0 | Omega0 | 0.0438 ± 0.0005 | 0.0083 ± 0.0004 | 0.0307 ± 0.0007 | 0.0493 ± 0.0005 | 0.0449 ± 0.0009 | 0.0633 ± 0.0000 | 0.56 |
+| only-sigma8 | sigma8 | 0.0613 ± 0.0009 | 0.0100 ± 0.0003 | 0.0430 ± 0.0010 | 0.0690 ± 0.0009 | 0.0656 ± 0.0006 | 0.0549 ± 0.0073 | 0.10 |
+| only-OmegaBaryon | OmegaBaryon | 0.0596 ± 0.0008 | 0.0097 ± 0.0004 | 0.0418 ± 0.0009 | 0.0671 ± 0.0008 | 0.0646 ± 0.0009 | 0.0549 ± 0.0073 | 0.14 |
+| only-HubbleParam | HubbleParam | 0.0625 ± 0.0011 | 0.0104 ± 0.0003 | 0.0436 ± 0.0008 | 0.0703 ± 0.0013 | 0.0671 ± 0.0011 | 0.0506 ± 0.0000 | 0.07 |
+| only-n_s | n_s | 0.0616 ± 0.0010 | 0.0102 ± 0.0003 | 0.0430 ± 0.0009 | 0.0694 ± 0.0011 | 0.0662 ± 0.0009 | 0.0506 ± 0.0000 | 0.09 |
+| only-Omega0+OmegaBaryon | Omega0, OmegaBaryon | 0.0280 ± 0.0013 | 0.0064 ± 0.0002 | 0.0202 ± 0.0012 | 0.0313 ± 0.0015 | 0.0262 ± 0.0011 | 0.0759 ± 0.0000 | 0.99 |
+| only-f_b | f_b | 0.0268 ± 0.0012 | 0.0061 ± 0.0004 | 0.0185 ± 0.0004 | 0.0302 ± 0.0014 | 0.0249 ± 0.0007 | 0.0802 ± 0.0073 | 1.02 |
+
+Permutation importance on the `all` models (ΔRMSE, mean ± sd over seeds; 20 perms each):
+
+| permuted | ΔRMSE |
+|---|---|
+| Omega0 | 0.0544 ± 0.0026 |
+| sigma8 | 0.0028 ± 0.0005 |
+| OmegaBaryon | 0.0234 ± 0.0007 |
+| HubbleParam | 0.0007 ± 0.0003 |
+| n_s | 0.0023 ± 0.0006 |
+| Omega0+OmegaBaryon | 0.0611 ± 0.0024 |
+figures/2026-10/10-01/cosmo_ablation/ablate_cosmo_params.png
+figures/2026-10/10-01/cosmo_ablation/ablate_cosmo_params_fb_vs_nofb.png

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/kmax10_noparams.py", line 177, in <module>
+    main()
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/kmax10_noparams.py", line 163, in main
+    for d in _train_group(cfg, repo_root() / RUN_CFG, GROUP):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/scripts/k3_final.py", line 100, in _train_group
+    res = run_training(dc, dataclasses.replace(rc, seed=seed))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/src/fgas_spk/train.py", line 1797, in run_training
+    scratch_root = resolve_scratch_root(
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/pscratch/sd/l/lindajin/fgas-to-pk-ml/src/fgas_spk/paths.py", line 118, in resolve_scratch_root
+    raise RuntimeError(
+RuntimeError: No scratch root configured: set $FGAS_SCRATCH_ROOT or pass --scratch-root / write_root. This must be set per machine; the code does not guess a writable location.

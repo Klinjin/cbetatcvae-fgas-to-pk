@@ -1,0 +1,12 @@
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82/20261002T192850Z__cb09b618__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82/20261002T192859Z__1e06e606__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82/20261002T192908Z__1536b129__2e53c8d
+moved figures for cb09b618 -> figures/2026-10/10-02/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82
+moved figures for 1e06e606 -> figures/2026-10/10-02/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82
+moved figures for 1536b129 -> figures/2026-10/10-02/arcmin9_cosmo-only-Omega0+OmegaBaryon_kmax10_snap82

@@ -1,0 +1,51 @@
+# config_eighth_gen_compiled_snap82_arcmin_le6_noparams.yaml with the target restricted to k in [0, 3] h/Mpc (scripts/kmax10_noparams.py).
+# A/B arm (no cosmology): identical to config_eighth_gen_compiled_snap82_arcmin_le6.yaml except include_camels_params: false (f_gas profile only).
+# Radial input: 9 arcmin-design bins (snap82), NOT the full 18-bin grid.
+# This config selects the FULL 18-bin arcmin-design dataset (tag 20260930-arcmin-all:
+# fgas_spk__CAMELS-IllustrisTNG-L50n512-SB35__snap082_z0.21__src-lindajin__rank-mstar__20260930-arcmin-all.npz, fgas (1024, 5, 18))
+# and keeps its 9 bins <= 6 arcmin (inclusive) with radial_range_arcmin: 6, applied by the
+# loader; radial_range_arcmin: null would keep all 18 bins. Loaded profile input X = (1024, 9).
+#   radii_arcmin = [1, 1.625, 2.25, 2.875, 3.5, 4.125, 4.75, 5.375, 6] (identical in every sim)
+#   comoving radii vary per sim with cosmology: per-bin median 0.173 -- 1.037 Mpc/h
+#   (innermost bin 0.168 -- 0.179, outermost 1.006 -- 1.072 Mpc/h across sims)
+# Bit-identical input to the pre-cut 9-bin dataset (tag 20260930-arcmin-le6) that the recorded
+# arcmin9_* runs used. radial_range_mpch must stay null: on this dataset radii_mpch is only a
+# nominal per-bin median, so the loader refuses a Mpc/h crop.
+# A/B (radial design) arm arcmin: the ARCMIN-design dataset (scripts/build_dataset_eighth_gen_arcmin.py; 9 bins <= 6 arcmin, fixed in angle across sims),
+# radial_range_mpch: null (required: its radii_mpch is a nominal per-bin median, so Mpc/h crops are refused). Otherwise identical to the mpch arm.
+# DataConfig: eighth-gen snap82 dataset built DIRECTLY from the
+# producer's compiled f_gas files
+#   DeltaSigma_kSZ_over_DeltaSigma_total_profiles_snap82_nd_*_n_*_eighth_gen.npz
+# (comoving Mpc/h design, halos ranked by saved stellar mass at production) by
+# scripts/build_dataset_eighth_gen_compiled.py.
+#
+# number_density_indices [2] -> n = 8.0e-3 (Mpc/h)^-3, 1000 halos (snap82 bins).
+# Target: full SP(k) curve, 255 bins 0.178 -- 32.1 h/Mpc (Pk_512_3Dfield grid).
+# Caveat (CLAUDE.md): SP(k) = P_total/P_DM within the hydro run is a proxy that
+# biases at k >~ 5 h/Mpc in a feedback-correlated way.
+#
+#     python scripts/run.py --config-data scripts/configs/data/config_eighth_gen_compiled_snap82.yaml \
+#                           --config-run  scripts/configs/run/cvae_noise.yaml
+
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 82
+redshift: 0.21
+source: lindajin
+rank: mstar
+tag: '20260930-arcmin-all'
+sim_ids: null
+
+number_density_indices: [2]
+radial_range_mpch: null
+radial_range_arcmin: 6   # arcmin-design only: bins <= 6 arcmin (9 bins); null = all 18 bins
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: false
+camels_param_indices: null
+camels_param_names: null
+
+target_mode: k_range
+k_target: null
+k_range: [0.0, 3.0]

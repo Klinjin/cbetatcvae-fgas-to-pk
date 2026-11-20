@@ -24,10 +24,17 @@ wavenumbers in h/Mpc. No h-factors are stripped; do that downstream if your
 public API requires it.
 
 Notes:
-    ``SubhaloMStar`` is not saved by the current producer, so ranking by stellar
-    mass requires re-reading the group catalogues (see ``rank_key='stellar'``,
-    which is left as an explicit hook rather than guessed). Ranking by the saved
-    ``halo_masses`` (M_500c) works with no extra I/O and is the default.
+    Eighth-generation producer outputs (``test_CAMELS_eighth_gen.ipynb``) save a
+    per-halo ``stellar_masses`` array alongside ``halo_masses`` (M_500c), so
+    ``rank_key='stellar'`` ranks the halo columns by that saved stellar mass
+    (the observationally-matched selection). Older products lack it, and
+    ``rank_key='stellar'`` raises on them rather than guessing. Ranking by the
+    saved ``halo_masses`` (M_500c) works on every generation and is the default.
+
+    The Delta Sigma profiles are read from whichever comoving-area variant the
+    producer wrote: ``*_kpch2_*`` (earlier generations) or ``*_mpch2_*`` (eighth
+    generation). The two differ by a constant area factor that cancels in the
+    gas-fraction ratio, so f_gas is unchanged by the variant.
 """
 
 from __future__ import annotations
@@ -62,6 +69,11 @@ _PROFILE_FILENAME_TEMPLATE = (
 
 # Projections stacked in the products.
 _PROJECTIONS = ("xy", "xz", "yz")
+
+# Comoving-area variants of the Delta Sigma profile keys, in lookup order:
+# ``kpch2`` (per (kpc/h)^2, earlier generations) and ``mpch2`` (per (Mpc/h)^2,
+# eighth generation). The constant factor between them cancels in f_gas.
+_DSIGMA_AREA_VARIANTS = ("kpch2", "mpch2")
 
 # The gas-fraction statistic this builder computes, stamped verbatim into the
 # dataset ``__meta__`` (``fgas_definition``). Datasets lacking this stamp, or
@@ -153,16 +165,15 @@ def _load_one_simulation(
     Args:
         profile_path (Path): Path to that simulation's ``Profiles_*.npz``.
         rank_key (str): Column-ordering key. ``'halo_mass'`` uses the saved
-            ``halo_masses`` (M_500c). ``'stellar'`` is reserved for a stellar-mass
-            ordering and raises until a catalogue re-read is wired in, because the
-            producer does not save ``SubhaloMStar``.
+            ``halo_masses`` (M_500c). ``'stellar'`` uses the saved per-halo
+            ``stellar_masses`` (present from the eighth-generation producer on).
 
     Returns:
         dict: With keys ``'ionized'`` and ``'total'`` -- the per-halo
             ``Delta Sigma`` profiles, each (n_radii, n_proj, n_halos) with the
             three projections on a separate axis and the halo axis re-ranked
-            descending -- ``'halo_masses'`` (n_halos,, descending, per distinct
-            halo), ``'radii_mpch'`` (n_radii,), and ``'fb'``. The gas-fraction
+            descending in ``rank_key`` -- ``'halo_masses'`` (n_halos,, M_500c per
+            distinct halo, in that same order), ``'radii_mpch'`` (n_radii,), and ``'fb'``. The gas-fraction
             ratio is deliberately NOT formed here: it is a ratio of *stacked*
             profiles, taken in :func:`build_fgas_spk_dataset` after the
             number-density cut (see the Stage 3.0 forensics note -- a per-halo
@@ -172,15 +183,23 @@ def _load_one_simulation(
     Raises:
         FileNotFoundError: If the profile file is absent.
         KeyError: If the ionized-gas profile is missing (i.e. the file predates
-            the third profile and cannot yield a gas fraction).
-        NotImplementedError: If ``rank_key='stellar'`` is requested.
+            the third profile and cannot yield a gas fraction), or if
+            ``rank_key='stellar'`` is requested on a file without
+            ``stellar_masses``.
     """
     if not profile_path.exists():
         raise FileNotFoundError(f"Missing profile file: {profile_path}")
 
     data = np.load(profile_path)
 
-    if f"prof2_ionized_gas_DSigma_kpch2_{_PROJECTIONS[0]}" not in data:
+    area = next(
+        (
+            a for a in _DSIGMA_AREA_VARIANTS
+            if f"prof2_ionized_gas_DSigma_{a}_{_PROJECTIONS[0]}" in data
+        ),
+        None,
+    )
+    if area is None:
         raise KeyError(
             f"{profile_path.name} has no ionized-gas profile (prof2_*). "
             "This file cannot produce a gas fraction; check the producer "
@@ -190,14 +209,14 @@ def _load_one_simulation(
     # Keep the three projections on a separate axis (not concatenated into the
     # halo axis), so a number-density cut selects N *distinct* halos with all of
     # their projections, rather than N halo-projection columns (which would be
-    # ~N/3 distinct halos). Using the kpch2 variant keeps the ratio physical; the
-    # arcmin2 variant gives an identical ratio since the per-radius angular
-    # conversion cancels.
+    # ~N/3 distinct halos). Using a comoving-area variant (kpch2 or mpch2) keeps
+    # the ratio physical; the arcmin2 variant gives an identical ratio since the
+    # per-radius angular conversion cancels.
     ionized = np.stack(
-        [data[f"prof2_ionized_gas_DSigma_kpch2_{p}"] for p in _PROJECTIONS], axis=1
+        [data[f"prof2_ionized_gas_DSigma_{area}_{p}"] for p in _PROJECTIONS], axis=1
     )
     total = np.stack(
-        [data[f"prof1_total_DSigma_kpch2_{p}"] for p in _PROJECTIONS], axis=1
+        [data[f"prof1_total_DSigma_{area}_{p}"] for p in _PROJECTIONS], axis=1
     )
 
     fb = float(data["fb"])
@@ -206,15 +225,23 @@ def _load_one_simulation(
     if rank_key == "halo_mass":
         order = np.argsort(halo_masses)[::-1]  # descending M_500c, per distinct halo
     elif rank_key == "stellar":
-        raise NotImplementedError(
-            "Stellar-mass ranking requires SubhaloMStar, which the producer "
-            "does not save. Re-read the group catalogue per sim and pass the "
-            "stellar masses in, or have the producer dump SubhaloMStar."
-        )
+        if "stellar_masses" not in data:
+            raise KeyError(
+                f"{profile_path.name} has no 'stellar_masses'; stellar-mass "
+                "ranking needs an eighth-generation (or later) product."
+            )
+        stellar_masses = np.asarray(data["stellar_masses"])  # [M_sun/h], per halo
+        if stellar_masses.shape != halo_masses.shape:
+            raise ValueError(
+                f"{profile_path.name}: stellar_masses {stellar_masses.shape} "
+                f"does not align with halo_masses {halo_masses.shape}."
+            )
+        # Descending M_star; the stable sort keeps the producer's order on ties.
+        order = np.argsort(-stellar_masses, kind="stable")
     else:
         raise ValueError(f"Unknown rank_key: {rank_key!r}")
 
-    # Reorder the halo axis (shared across projections) by descending mass.
+    # Reorder the halo axis (shared across projections) by the descending rank key.
     ionized = ionized[:, :, order]
     total = total[:, :, order]
     halo_masses = halo_masses[order]
@@ -339,7 +366,9 @@ def build_fgas_spk_dataset(
         sim_ids (Sequence[int], optional): Simulation indices to load. Defaults
             to ``range(n_sims)`` inferred from the suppression file.
         rank_key (str, optional): Halo-ordering key for the number-density cut.
-            Defaults to ``'halo_mass'`` (M_500c).
+            ``'halo_mass'`` ranks by the saved M_500c; ``'stellar'`` by the saved
+            per-halo stellar mass (eighth-generation products and later).
+            ``mean_halo_mass`` is M_500c either way. Defaults to ``'halo_mass'``.
         fgas_sanity_range (tuple[float, float], optional): Inclusive build-time
             validation range (see the two-tier guard below). Defaults to
             :data:`DEFAULT_FGAS_SANITY_RANGE` ([-1.0, 3.0], provisional).
@@ -389,10 +418,10 @@ def build_fgas_spk_dataset(
         if radii_ref is None:
             radii_ref = loaded["radii_mpch"]
 
-        ionized = loaded["ionized"]         # (n_radii, n_proj, n_halos), desc mass
+        ionized = loaded["ionized"]         # (n_radii, n_proj, n_halos), desc rank key
         total = loaded["total"]             # same shape and ordering
         fb = loaded["fb"]
-        masses = loaded["halo_masses"]      # (n_halos,), descending
+        masses = loaded["halo_masses"]      # (n_halos,), M_500c in rank-key order
         n_halos_total = ionized.shape[2]
 
         per_nd_mean = []
@@ -508,14 +537,41 @@ def build_fgas_spk_from_compiled(
     box_size_mpch: float = 50.0,
     name_extra: str = "_sixth_gen_makeMap",
     params_path: str | Path | None = None,
+    name_suffix: str = "",
+    rank_key: str = "frozen_at_production",
+    radial_design: str = "mpch",
+    max_radius_arcmin: float | None = None,
 ) -> FgasSpkDataset:
     """Fast path: load the pre-compiled per-nd ratio files instead of raw profiles.
 
     Reads the aggregated ``{name_extra}DeltaSigma_kSZ_over_DeltaSigma_total_
-    profiles_snap{NN}_nd_{i}_n_{N}.npz`` files written by the notebook (each
-    holding the per-simulation f_gas ratio of shape (n_sims, n_radii)) and stacks
-    them into the same :class:`FgasSpkDataset` layout. This is much faster than
-    re-reading 1024 raw profile files, at the cost of flexibility.
+    profiles_snap{NN}_nd_{i}_n_{N}{name_suffix}.npz`` files written by the
+    notebook (each holding the per-simulation f_gas ratio of shape
+    (n_sims, n_radii)) and stacks them into the same :class:`FgasSpkDataset`
+    layout. This is much faster than re-reading 1024 raw profile files, at the
+    cost of flexibility.
+
+    Eighth-generation files (``test_CAMELS_eighth_gen.ipynb``, suffix
+    ``'_eighth_gen'``, no prefix) store the comoving grid as a per-simulation
+    ``radii_mpch`` array (n_sims, n_radii) instead of ``radii``, plus scalar
+    ``n_halos`` and ``number_density``. The grid must be identical across
+    simulations (it is a fixed comoving grid) and is collapsed to one row;
+    ``n_halos`` must match the filename count. The stored ``number_density`` is
+    only cross-checked (with a warning): the eighth-gen producer writes the
+    snap74 list into the snap82 files although their ``n_halos`` follow the
+    snap82 list, so ``n_halos`` and the ``number_densities`` passed here are
+    authoritative.
+
+    Eighth-generation products come in two radial designs, chosen by
+    ``radial_design``: ``'mpch'`` (``..._profiles_snap...``; 20 bins on one
+    fixed comoving grid, 0.1--20 Mpc/h) and ``'arcmin'``
+    (``..._profiles_arcmin_snap...``; 18 bins, the inner ones fixed in angle and
+    the outer ones log-spaced to a fixed 20 Mpc/h edge, so the comoving radius
+    of every bin varies between simulations with their cosmology). For
+    ``'arcmin'`` no single grid exists: ``radii_mpch`` is set to the per-bin
+    median of the per-simulation comoving radii, as a nominal label only.
+    Callers must record that (the build script stamps ``radial_grid`` into
+    ``__meta__``, and the loader then refuses a ``radial_range_mpch`` crop).
 
     Warning:
         This inherits whatever halo ranking was frozen when the compiled files
@@ -524,7 +580,8 @@ def build_fgas_spk_from_compiled(
         and that cannot be corrected here. ``mean_halo_mass`` is unavailable
         (the compiled files do not store per-halo masses) and is returned as
         NaN. Use :func:`build_fgas_spk_dataset` when correctness of the binning
-        matters; use this for quick iteration when it does not.
+        matters; use this for quick iteration when it does not, or when the
+        ordering the producer used is known and recorded via ``rank_key``.
 
     Args:
         data_dir (str | Path): Directory holding the compiled ``.npz`` files and
@@ -541,13 +598,41 @@ def build_fgas_spk_from_compiled(
             that is what is actually on disk.
         params_path (str | Path, optional): Path to ``camels_params_matrix.npy``.
             Defaults to None.
+        name_suffix (str, optional): Filename suffix tag before ``.npz``, e.g.
+            ``'_eighth_gen'``. Defaults to ``''`` (earlier, prefix-stamped
+            generations).
+        rank_key (str, optional): The halo ordering the producer applied before
+            its ``[:, :n_halos]`` slice, recorded in the dataset (it is not, and
+            cannot be, re-applied here). ``'stellar'`` for eighth-gen products,
+            which the producer ranks by saved stellar mass. Defaults to
+            ``'frozen_at_production'`` (ordering unknown).
+        radial_design (str, optional): ``'mpch'`` (fixed comoving grid; must be
+            identical across simulations) or ``'arcmin'`` (per-simulation grid;
+            median stored). Selects the ``_arcmin`` filename infix and is checked
+            against a stored ``unit`` when present. Defaults to ``'mpch'``.
+        max_radius_arcmin (float, optional): ``'arcmin'`` design only. Keep only
+            the radial bins with ``radii_arcmin <= max_radius_arcmin``, which must
+            then sit at identical angular radii in every simulation (the inner,
+            angle-fixed part of the design; the outer bins are tied to a fixed
+            comoving edge and vary in angle). Defaults to None (all bins).
 
     Returns:
         FgasSpkDataset: Assembled from the compiled files.
 
     Raises:
         FileNotFoundError: If a compiled file for any number density is missing.
+        ValueError: If ``radial_design`` is unknown or disagrees with a file's
+            stored ``unit``, a file's ``n_halos`` disagrees with its filename,
+            the radial grid differs between simulations (``'mpch'``) or between
+            number densities, or the files hold different numbers of sims.
     """
+    if radial_design not in ("mpch", "arcmin"):
+        raise ValueError(
+            f"radial_design must be 'mpch' or 'arcmin', got {radial_design!r}."
+        )
+    if max_radius_arcmin is not None and radial_design != "arcmin":
+        raise ValueError("max_radius_arcmin applies only to radial_design='arcmin'.")
+    design_infix = "_arcmin" if radial_design == "arcmin" else ""
     data_dir = Path(data_dir)
     suppression_path = Path(suppression_path)
     _check_suppression_snapshot(suppression_path, snapshot)
@@ -563,19 +648,88 @@ def build_fgas_spk_from_compiled(
     for nd_idx, n_halos in enumerate(n_halos_per_nd):
         fname = (
             f"{name_extra}DeltaSigma_kSZ_over_DeltaSigma_total_profiles"
-            f"_snap{snapshot}_nd_{nd_idx}_n_{n_halos}.npz"
+            f"{design_infix}_snap{snapshot}_nd_{nd_idx}_n_{n_halos}"
+            f"{name_suffix}.npz"
         )
         path = data_dir / fname
         if not path.exists():
             raise FileNotFoundError(
-                f"Missing compiled ratio file: {path}. Check `name_extra` "
-                "matches the files on disk (they may be fifth-gen stamped)."
+                f"Missing compiled ratio file: {path}. Check `name_extra` / "
+                "`name_suffix` and `number_densities` match the files on disk "
+                "(they may be fifth-gen stamped, or a different snapshot's "
+                "number-density list)."
             )
         d = np.load(path)
-        fgas_per_nd.append(np.asarray(d["prof"]))          # (n_sims, n_radii)
-        fgas_std_per_nd.append(np.asarray(d["prof_std"]))
+
+        if "unit" in d and str(d["unit"]) != radial_design:
+            raise ValueError(
+                f"{path.name}: stored unit={str(d['unit'])!r} disagrees with "
+                f"radial_design={radial_design!r}."
+            )
+        if "n_halos" in d and int(d["n_halos"]) != n_halos:
+            raise ValueError(
+                f"{path.name}: stored n_halos={int(d['n_halos'])} disagrees with "
+                f"the filename count {n_halos}."
+            )
+        if "number_density" in d and not np.isclose(
+            float(d["number_density"]), number_densities[nd_idx]
+        ):
+            warnings.warn(
+                f"{path.name}: stored number_density="
+                f"{float(d['number_density']):g} disagrees with the requested "
+                f"{number_densities[nd_idx]:g} (= n_halos / box volume = "
+                f"{n_halos} / {box_size_mpch:g}^3); using the requested value.",
+                stacklevel=2,
+            )
+
+        # Comoving radial grid [Mpc/h]: ``radii`` (earlier generations) or the
+        # per-simulation ``radii_mpch`` (eighth generation). The 'mpch' design
+        # must be one fixed grid shared by every simulation; the 'arcmin'
+        # design varies per simulation and is compared in full across nd files.
+        radii = np.asarray(d["radii"] if "radii" in d else d["radii_mpch"])
+        prof = np.asarray(d["prof"])                        # (n_sims, n_radii)
+        prof_std = np.asarray(d["prof_std"])
+        if max_radius_arcmin is not None:
+            # Angular cut: keep bins at or below the limit in EVERY simulation, and
+            # require those bins to be one fixed angular grid across sims.
+            radii_arcmin = np.atleast_2d(np.asarray(d["radii_arcmin"]))
+            # Relative tolerance so a bin stored at the limit (e.g. 6.0) is kept.
+            keep = np.all(
+                radii_arcmin <= max_radius_arcmin * (1.0 + 1e-9), axis=0
+            )
+            if not keep.any():
+                raise ValueError(
+                    f"{path.name}: no radial bin lies at or below {max_radius_arcmin} "
+                    "arcmin in every simulation."
+                )
+            if not np.allclose(radii_arcmin[:, keep], radii_arcmin[0, keep]):
+                raise ValueError(
+                    f"{path.name}: bins up to {max_radius_arcmin} arcmin are not "
+                    "at identical angular radii across simulations."
+                )
+            radii, prof, prof_std = radii[..., keep], prof[:, keep], prof_std[:, keep]
+        if radial_design == "mpch" and radii.ndim > 1:
+            if not np.allclose(radii, radii[0]):
+                raise ValueError(
+                    f"{path.name}: radii_mpch varies between simulations; the "
+                    "compiled f_gas is not on one fixed comoving grid."
+                )
+            radii = radii[0]
         if radii_ref is None:
-            radii_ref = np.asarray(d["radii"])
+            radii_ref = radii
+        elif radii.shape != radii_ref.shape or not np.allclose(radii, radii_ref):
+            raise ValueError(
+                f"{path.name}: radial grid differs from nd_0's; cannot stack "
+                "number densities on one grid."
+            )
+
+        if fgas_per_nd and prof.shape[0] != fgas_per_nd[0].shape[0]:
+            raise ValueError(
+                f"{path.name}: {prof.shape[0]} sims, but nd_0 has "
+                f"{fgas_per_nd[0].shape[0]}; the files are not row-aligned."
+            )
+        fgas_per_nd.append(prof)
+        fgas_std_per_nd.append(prof_std)
 
     # Stack to (n_sims, n_nd, n_radii) to match the raw-loader layout.
     fgas = np.stack(fgas_per_nd, axis=1)
@@ -588,8 +742,14 @@ def build_fgas_spk_from_compiled(
         )
     sim_ids = list(range(n_sims))
 
+    radii_out = np.asarray(radii_ref)
+    if radii_out.ndim > 1:
+        # 'arcmin' design: per-simulation comoving radii (n_sims, n_radii); store
+        # the per-bin median as a nominal label (see the docstring).
+        radii_out = np.median(radii_out, axis=0)
+
     return FgasSpkDataset(
-        radii_mpch=np.asarray(radii_ref),
+        radii_mpch=radii_out,
         number_densities=np.asarray(number_densities),
         fgas=fgas,
         fgas_std=fgas_std,
@@ -597,7 +757,7 @@ def build_fgas_spk_from_compiled(
         suppression=suppression[:n_sims],
         sim_ids=np.asarray(sim_ids),
         mean_halo_mass=np.full((n_sims, len(number_densities)), np.nan),
-        rank_key="frozen_at_production",
+        rank_key=rank_key,
         camels_params=_load_params(params_path, sim_ids),
         snapshot=snapshot,
     )

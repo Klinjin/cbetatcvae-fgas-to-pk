@@ -1,0 +1,50 @@
+# RunConfig for the JOINT beta-TCVAE (scripts/joint_beta_tcvae.py;
+# fgas_spk.models.beta_tcvae): one model over both snapshots (snap74 DESI LRG
+# z=0.47, snap82 DESI BGS z=0.21) and all five number densities of each,
+# conditioned on the f_gas/f_b profile, the 5 cosmological parameters (X_params)
+# and X_cond = [log10 n, z] in both the encoder and the decoder.
+#
+# Matched to scripts/configs/run/cvae_noise_joint.yaml (the joint cVAE) in every
+# shared setting -- network width/depth, epochs, optimiser, batch size, KL warm-up,
+# internal grouped holdout, outer split -- so the two are compared like for like.
+# What differs is the model: fixed N(0, I) prior, latent_dim 2 (Lin et al.), the
+# decomposed KL of Lin et al. Eq. D6 and the sigma-VAE variance (Eq. C12) instead
+# of the cVAE's learned prior and learned noise head.
+#
+# alpha = beta = gamma = lambda = 1: the decomposed objective equals the plain
+# ELBO (Lin et al. Eq. C14) -- a baseline, not a tuned beta-TC setting.
+#
+model: beta_tcvae             # registry name; needs `import fgas_spk.models.beta_tcvae`
+model_params:
+  latent_dim: 2               # Lin et al.'s 2-D latent
+  hidden: 128                 # as the joint cVAE
+  n_layers: 2                 # as the joint cVAE
+  epochs: 200                 # as the joint cVAE
+  lr: 5.0e-4                  # as the joint cVAE
+  weight_decay: 1.0e-4        # >0 -> AdamW, as the joint cVAE
+  dropout: 0.0                # as the joint cVAE
+  batch_size: 128             # as the joint cVAE (MSS minibatch M = 128)
+  kl_lambda: 1.0              # overall KL scale lambda
+  alpha_mi: 1.0               # index-code mutual information weight
+  beta_tc: 1.0                # total-correlation weight
+  gamma_dwkl: 1.0             # dimension-wise KL weight
+  anneal_epochs: null         # null -> epochs // 4 (= 50); linear warm-up, as the joint cVAE
+  anneal_cycle_epochs: null   # no cyclical schedule (single warm-up, as the joint cVAE)
+  use_profile: true           # f_gas profile feeds encoder and decoder, as the joint cVAE
+  val_frac: 0.1               # internal holdout for best-epoch restore
+  val_grouped: true           # holdout by simulation (10 rows/sim share 2 targets)
+  obs_calibrate_on_val: false # ship the training-set sigma-VAE variance
+
+seed: 0
+
+# Identical to cvae_noise_joint.yaml, so the test simulations are the same.
+split:
+  train_frac: 0.7
+  val_frac: 0.1
+  test_frac: 0.2
+  seed: 10
+
+evaluation:
+  suppressed_thresholds: [0.95, 0.9, 0.8]
+
+write_root: null

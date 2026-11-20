@@ -1,0 +1,63 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.11.0/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.11.0/Miniforge3-26.9.4-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.11.0/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-16507d91be0dc1ce4f94c04d4d0430210b8685d9/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+{
+  "rows": 10240,
+  "sims": 1024,
+  "rows_per_snapshot": {
+    "74": 5120,
+    "82": 5120
+  },
+  "X_profile": 9,
+  "X_cond": 2,
+  "X_params": 5,
+  "y_n_k": 79,
+  "param_names": [
+    "Omega0",
+    "sigma8",
+    "OmegaBaryon",
+    "HubbleParam",
+    "n_s"
+  ],
+  "x_cond": [
+    "log10_number_density",
+    "redshift"
+  ],
+  "k_min_max": [
+    0.17799282449393905,
+    9.98901349428907
+  ]
+}
+Using CUDA device for Cvae.
+seed 0: 20261118T213218Z__f0f8a8da__2e53c8d test RMSE 0.0384 best epoch 94
+Using CUDA device for Cvae.
+seed 1: 20261118T213311Z__cf69de63__2e53c8d test RMSE 0.0392 best epoch 116
+Using CUDA device for Cvae.
+seed 2: 20261118T213404Z__52e49810__2e53c8d test RMSE 0.0364 best epoch 69
+cond_beta_tcvae seed 0 20261118T213218Z__f0f8a8da__2e53c8d test rmse 0.0384
+cond_beta_tcvae seed 1 20261118T213311Z__cf69de63__2e53c8d test rmse 0.0392
+cond_beta_tcvae seed 2 20261118T213404Z__52e49810__2e53c8d test rmse 0.0364
+beta_tcvae seed 0 20261118T072408Z__fa383495__2e53c8d test rmse 0.1016
+beta_tcvae seed 1 20261118T072444Z__6fef5791__2e53c8d test rmse 0.1058
+beta_tcvae seed 2 20261118T072526Z__9b32bc26__2e53c8d test rmse 0.1043
+joint_cvae seed 0 20261023T224201Z__cb129432__2e53c8d test rmse 0.0386
+joint_cvae seed 1 20261023T224240Z__f4ad05ad__2e53c8d test rmse 0.0386
+joint_cvae seed 2 20261023T224318Z__3b21b03a__2e53c8d test rmse 0.0395
+| tracer | n [(Mpc/h)⁻³] | all k cond. β-TCVAE (z=μ_p) | all k cond. β-TCVAE baseline ŷ | all k β-TCVAE, N(0,I) prior | all k joint cVAE | k∈(0,1] cond. β-TCVAE (z=μ_p) | k∈(0,1] cond. β-TCVAE baseline ŷ | k∈(0,1] β-TCVAE, N(0,I) prior | k∈(0,1] joint cVAE | k∈(1,3] cond. β-TCVAE (z=μ_p) | k∈(1,3] cond. β-TCVAE baseline ŷ | k∈(1,3] β-TCVAE, N(0,I) prior | k∈(1,3] joint cVAE | k∈(3,10] cond. β-TCVAE (z=μ_p) | k∈(3,10] cond. β-TCVAE baseline ŷ | k∈(3,10] β-TCVAE, N(0,I) prior | k∈(3,10] joint cVAE |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| DESI LRG | 0.0001 | 0.0327 ± 0.0014 | 0.0327 ± 0.0014 | 0.1030 ± 0.0021 | 0.0313 ± 0.0006 | 0.0046 ± 0.0002 | 0.0054 ± 0.0002 | 0.0145 ± 0.0003 | 0.0054 ± 0.0004 | 0.0195 ± 0.0007 | 0.0201 ± 0.0006 | 0.0673 ± 0.0007 | 0.0205 ± 0.0013 | 0.0374 ± 0.0017 | 0.0373 ± 0.0017 | 0.1168 ± 0.0025 | 0.0355 ± 0.0007 |
+| DESI LRG | 0.00028 | 0.0287 ± 0.0020 | 0.0291 ± 0.0019 | 0.1029 ± 0.0021 | 0.0279 ± 0.0005 | 0.0046 ± 0.0003 | 0.0053 ± 0.0001 | 0.0146 ± 0.0002 | 0.0055 ± 0.0003 | 0.0180 ± 0.0019 | 0.0189 ± 0.0014 | 0.0675 ± 0.0008 | 0.0194 ± 0.0005 | 0.0327 ± 0.0024 | 0.0329 ± 0.0022 | 0.1167 ± 0.0025 | 0.0314 ± 0.0007 |
+| DESI LRG | 0.0005 | 0.0285 ± 0.0025 | 0.0289 ± 0.0021 | 0.1032 ± 0.0021 | 0.0282 ± 0.0007 | 0.0047 ± 0.0003 | 0.0055 ± 0.0001 | 0.0147 ± 0.0002 | 0.0058 ± 0.0001 | 0.0187 ± 0.0022 | 0.0196 ± 0.0017 | 0.0679 ± 0.0008 | 0.0203 ± 0.0001 | 0.0323 ± 0.0028 | 0.0327 ± 0.0025 | 0.1169 ± 0.0025 | 0.0316 ± 0.0009 |
+| DESI LRG | 0.001 | 0.0276 ± 0.0024 | 0.0282 ± 0.0020 | 0.1036 ± 0.0020 | 0.0284 ± 0.0010 | 0.0052 ± 0.0004 | 0.0059 ± 0.0002 | 0.0149 ± 0.0002 | 0.0063 ± 0.0001 | 0.0198 ± 0.0024 | 0.0209 ± 0.0017 | 0.0687 ± 0.0007 | 0.0218 ± 0.0002 | 0.0309 ± 0.0026 | 0.0314 ± 0.0022 | 0.1173 ± 0.0024 | 0.0316 ± 0.0012 |
+| DESI LRG | 0.0024 | 0.0277 ± 0.0016 | 0.0286 ± 0.0018 | 0.1045 ± 0.0020 | 0.0292 ± 0.0010 | 0.0059 ± 0.0003 | 0.0067 ± 0.0002 | 0.0151 ± 0.0002 | 0.0067 ± 0.0000 | 0.0220 ± 0.0016 | 0.0234 ± 0.0014 | 0.0699 ± 0.0006 | 0.0231 ± 0.0004 | 0.0306 ± 0.0017 | 0.0316 ± 0.0020 | 0.1182 ± 0.0024 | 0.0323 ± 0.0012 |
+| DESI BGS | 0.001 | 0.0394 ± 0.0018 | 0.0396 ± 0.0025 | 0.1016 ± 0.0025 | 0.0424 ± 0.0015 | 0.0058 ± 0.0002 | 0.0063 ± 0.0002 | 0.0136 ± 0.0004 | 0.0078 ± 0.0003 | 0.0236 ± 0.0011 | 0.0244 ± 0.0017 | 0.0614 ± 0.0017 | 0.0284 ± 0.0010 | 0.0450 ± 0.0021 | 0.0451 ± 0.0029 | 0.1160 ± 0.0028 | 0.0479 ± 0.0018 |
+| DESI BGS | 0.004 | 0.0388 ± 0.0014 | 0.0397 ± 0.0010 | 0.1032 ± 0.0023 | 0.0428 ± 0.0005 | 0.0074 ± 0.0002 | 0.0078 ± 0.0002 | 0.0146 ± 0.0004 | 0.0091 ± 0.0004 | 0.0275 ± 0.0009 | 0.0288 ± 0.0004 | 0.0648 ± 0.0013 | 0.0331 ± 0.0010 | 0.0436 ± 0.0016 | 0.0445 ± 0.0013 | 0.1175 ± 0.0026 | 0.0475 ± 0.0008 |
+| DESI BGS | 0.008 | 0.0426 ± 0.0025 | 0.0436 ± 0.0020 | 0.1043 ± 0.0021 | 0.0463 ± 0.0002 | 0.0089 ± 0.0004 | 0.0091 ± 0.0001 | 0.0150 ± 0.0004 | 0.0101 ± 0.0002 | 0.0324 ± 0.0014 | 0.0337 ± 0.0003 | 0.0667 ± 0.0012 | 0.0372 ± 0.0007 | 0.0475 ± 0.0030 | 0.0484 ± 0.0025 | 0.1185 ± 0.0025 | 0.0511 ± 0.0003 |
+| DESI BGS | 0.02 | 0.0504 ± 0.0024 | 0.0510 ± 0.0023 | 0.1060 ± 0.0020 | 0.0499 ± 0.0010 | 0.0102 ± 0.0004 | 0.0103 ± 0.0002 | 0.0156 ± 0.0004 | 0.0110 ± 0.0001 | 0.0381 ± 0.0015 | 0.0392 ± 0.0009 | 0.0691 ± 0.0011 | 0.0410 ± 0.0005 | 0.0562 ± 0.0027 | 0.0567 ± 0.0028 | 0.1202 ± 0.0024 | 0.0550 ± 0.0012 |
+| DESI BGS | 0.03 | 0.0524 ± 0.0028 | 0.0533 ± 0.0030 | 0.1068 ± 0.0020 | 0.0518 ± 0.0014 | 0.0106 ± 0.0005 | 0.0108 ± 0.0003 | 0.0158 ± 0.0003 | 0.0114 ± 0.0000 | 0.0394 ± 0.0022 | 0.0407 ± 0.0015 | 0.0701 ± 0.0011 | 0.0424 ± 0.0006 | 0.0585 ± 0.0032 | 0.0594 ± 0.0035 | 0.1210 ± 0.0023 | 0.0570 ± 0.0017 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/cond_beta_tcvae/cond_beta_tcvae_rmse_vs_k.png
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/cond_beta_tcvae/cond_beta_tcvae_history_terms.png
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/cond_beta_tcvae/cond_beta_tcvae_latent_prior_posterior.png
+seed 0: diagnostics written for 20261118T213218Z__f0f8a8da__2e53c8d
+seed 1: diagnostics written for 20261118T213311Z__cf69de63__2e53c8d
+seed 2: diagnostics written for 20261118T213404Z__52e49810__2e53c8d

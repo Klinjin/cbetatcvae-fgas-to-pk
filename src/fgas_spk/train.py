@@ -27,8 +27,9 @@ only the headline scalars. These diagnostics are computed post-fit and resolve
 no physics choice.
 
 **Residual sign convention.** Every residual diagnostic here -- the
-``rmse_vs_k`` figure's envelope panel and the ``residual_map`` heatmap -- uses
-``pred - true``. The two figures are meant to be read together; a mixed
+``rmse_vs_k`` figure's envelope panel, its percentage companion
+``frac_err_vs_k`` (``100 * (pred - true) / true``), and the ``residual_map``
+heatmap -- uses ``pred - true``. The two figures are meant to be read together; a mixed
 convention would make them silently contradict each other.
 
 There is no cross-suite logic: the data is a single CAMELS IllustrisTNG suite, so
@@ -168,6 +169,7 @@ def _subset(td: TrainingData, mask: np.ndarray) -> TrainingData:
         param_names=td.param_names,
         meta=td.meta,
         config=td.config,
+        X_std=td.X_std[mask] if td.X_std is not None else None,
     )
 
 
@@ -232,30 +234,200 @@ def _write_pred_vs_true_figure(
     return out
 
 
-def _write_rmse_vs_k_figure(
-    model, td: TrainingData, masks: dict, label: str, summary: dict, extension: str = "png"
-) -> Path | None:
-    """Write per-k RMSE per split, over a held-out signed-residual envelope.
+# Reference accuracy level drawn on the publication RMSE-vs-k figure: RMSE = 0.01
+# on the top panel and +-1% on the bottom, i.e. 1% of the unsuppressed SP = 1.
+_RMSE_PUB_REF_PCT = 1.0
+# Reference wavenumber [h/Mpc], a dotted vertical line on both panels.
+_RMSE_PUB_K_REF = 3.0
+
+
+def plot_rmse_vs_k_pub(
+    k: np.ndarray,
+    splits: dict,
+    out: Path,
+    held: str = "test",
+    snapshot: int | None = None,
+    cosmo: bool | None = None,
+) -> dict:
+    """Draw the publication per-k RMSE figure and return its summary statistics.
 
     Two panels sharing the log-k axis:
 
-    - **top** -- RMSE computed *per k bin* (across rows of a split), one curve per
-      non-empty split (train / val / test); ``val`` is omitted when
-      ``val_frac == 0``. This shows where, in k, the model errs, and a train/test
-      crossing is the overfitting signature.
-    - **bottom** -- the *signed* residual ``pred - true`` on the held-out fold
-      only: median with 16-84 and 5-95 percentile bands across curves, per k bin,
-      against a ``y = 0`` reference.
+    - **top** -- per-k reconstruction RMSE of SP(k) (absolute) for each split in
+      ``splits``, with the 1% threshold drawn at RMSE = 0.01, i.e. 1% of the
+      unsuppressed SP = 1 (a larger fractional error where SP < 1);
+    - **bottom** -- the ``held`` split's signed residual in percent of the
+      unsuppressed SP = 1, ``delta_SP = 100 * (pred - true)`` (the same
+      normalisation as the top panel's threshold; NOT divided by the true SP,
+      which would inflate the error of the most suppressed curves): median with
+      16-84 and 5-95 percentile bands across curves.
 
-    The two panels answer different questions and are only meaningful together:
-    RMSE conflates bias with scatter, so a large RMSE cannot distinguish "unbiased
-    but noisy" from "systematically low". The envelope separates them -- its median
-    is the bias, its width the scatter. The percentile levels follow the existing
-    ``fig10_spk_range`` convention in ``scripts/lin_analogue_figures.py``.
+    Both panels carry a dotted vertical line at k = :data:`_RMSE_PUB_K_REF`. The
+    tracer / redshift / conditioning annotation is drawn when ``snapshot`` is a
+    known snapshot and ``cosmo`` is given.
+
+    Args:
+        k (np.ndarray): Target wavenumbers [h/Mpc], shape (n_k,).
+        splits (dict): ``{split_name: (y_true, y_pred)}``, each (n_curves, n_k);
+            plotted in insertion order, coloured by name (train / val / test).
+        out (Path): Output image path.
+        held (str): The split whose residual envelope is drawn (must be a key
+            of ``splits``).
+        snapshot (int | None): Snapshot number, for the annotation.
+        cosmo (bool | None): Whether the model is conditioned on cosmology.
+
+    Returns:
+        dict: Per-split ``n``, RMSE at the highest k, median RMSE over k and the
+            fraction of k bins below the threshold, plus the fraction of k bins
+            whose held-out 16-84% band lies within +-1%.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker
+
+    from fgas_spk.pub_style import PLOT_RC, REDSHIFT, TRACER
+
+    ref = _RMSE_PUB_REF_PCT
+    with matplotlib.rc_context(PLOT_RC):
+        cycle = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+        colour = {"train": cycle[0], "val": cycle[1], "test": cycle[3]}
+        fig, (ax, axe) = plt.subplots(2, 1, sharex=True, figsize=(8, 9), layout="constrained",
+                                      gridspec_kw={"height_ratios": [1.0, 0.9]})
+        stats = {}
+        for name, (y, p) in splits.items():
+            rmse = np.sqrt(np.mean((p - y) ** 2, axis=0))
+            stats[name] = {"n": int(y.shape[0]), "rmse_k_max": float(rmse[-1]),
+                           "rmse_median_over_k": float(np.median(rmse)),
+                           "frac_k_bins_rmse_below_1pct": float(np.mean(rmse < ref / 100.0))}
+            ax.plot(k, rmse, color=colour[name], lw=2.2, label=f"{name} ($N={y.shape[0]}$)")
+        ax.axhline(ref / 100.0, color="0.35", ls="--", lw=1.4, label=f"{ref:g}% RMSE threshold")
+        for a in (ax, axe):  # reference wavenumber on both (shared-k) panels
+            a.axvline(_RMSE_PUB_K_REF, color="0.35", ls=":", lw=1.6,
+                      label=f"$k={_RMSE_PUB_K_REF:g}\\ h\\,\\mathrm{{Mpc}}^{{-1}}$" if a is ax else None)
+        ax.set_ylabel("Reconstruction RMSE")
+        ax.set_ylim(bottom=0)
+        ax.grid(True)
+        ax.legend(loc="upper left", frameon=False)
+        if snapshot in TRACER and cosmo is not None:
+            # Sit the label above the 1% line when that line is low in the panel
+            # (no-cosmology scale), else in the bottom-right corner below it.
+            thr_frac = (ref / 100.0) / ax.get_ylim()[1]
+            ax.text(0.97, 0.18 if thr_frac < 0.15 else 0.03,
+                    f"{TRACER[snapshot]} ($z={REDSHIFT[snapshot]}$)\n"
+                    + ("with cosmology" if cosmo else "no cosmology"),
+                    transform=ax.transAxes, ha="right", va="bottom", fontsize=16)
+
+        y, p = splits[held]
+        # Residual in percent of SP = 1 (absolute, not relative to the true SP).
+        delta = 100.0 * (p - y)
+        p05, p16, p50, p84, p95 = np.percentile(delta, [5, 16, 50, 84, 95], axis=0)
+        c = colour.get(held, cycle[3])
+        axe.fill_between(k, p05, p95, color=c, alpha=0.2, lw=0, label="5–95%")
+        axe.fill_between(k, p16, p84, color=c, alpha=0.4, lw=0, label="16–84%")
+        axe.plot(k, p50, color=c, lw=2.2, label="median")
+        axe.axhline(0.0, color="black", lw=0.8)
+        for s in (1.0, -1.0):
+            axe.axhline(s * ref, color="0.35", ls="--", lw=1.4,
+                        label=f"$\\pm${ref:g}%" if s > 0 else None)
+        axe.set_xscale("log")
+        # Plain-number 1-2-5 major ticks; matplotlib's default labels the log
+        # minor ticks when k spans under a decade, and they overlap.
+        decades = np.arange(np.floor(np.log10(k.min())), np.ceil(np.log10(k.max())) + 1)
+        ticks = [m * 10.0**d for d in decades for m in (1, 2, 5)]
+        axe.xaxis.set_major_locator(matplotlib.ticker.FixedLocator(ticks))
+        axe.xaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
+        axe.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+        axe.set_xlim(k.min() / 1.1, k.max() * 1.1)
+        axe.set_xlabel(r"$k\ [h\,\mathrm{Mpc}^{-1}]$")
+        axe.set_ylabel(f"$\\delta_\\mathrm{{SP}}$ ({held}) [%]")
+        axe.grid(True)
+        axe.legend(loc="lower left", frameon=False, ncol=2)
+        fig.savefig(out, dpi=200)
+        plt.close(fig)
+    stats["frac_k_bins_test_16_84_within_1pct"] = float(np.mean((p16 >= -ref) & (p84 <= ref)))
+    return stats
+
+
+def _write_rmse_vs_k_pub_figure(
+    model,
+    td: TrainingData,
+    masks: dict,
+    label: str,
+    summary: dict,
+    snapshot: int | None = None,
+    cosmo: bool | None = None,
+    extension: str = "png",
+) -> Path | None:
+    """Write the publication per-k RMSE figure (:func:`plot_rmse_vs_k_pub`).
+
+    One RMSE curve per non-empty split (train / val / test; ``val`` is omitted
+    when ``val_frac == 0``), over the signed-residual envelope of the held-out
+    fold ``summary["held_out_split"]``. RMSE conflates bias with scatter; the
+    envelope separates them -- its median is the bias, its width the scatter.
 
     Skipped for ``single_k`` targets: ``y`` is then 1-D (a single k bin), which is
     not a curve. matplotlib is imported lazily (Agg backend). Returns the written
     path, or None if matplotlib is unavailable or the figure was skipped.
+    """
+    try:
+        import matplotlib  # noqa: F401
+    except ImportError:  # pragma: no cover - matplotlib is in the env
+        return None
+
+    # single_k yields a 1-D target (one k bin); a per-k RMSE curve is undefined.
+    if np.asarray(td.y).ndim < 2:
+        return None
+
+    splits = {}
+    for name in ("train", "val", "test"):
+        mask = masks.get(name)
+        if mask is None or not np.asarray(mask).any():
+            continue
+        sub = _subset(td, mask)
+        y_true = np.asarray(sub.y, dtype=float)
+        y_pred = np.asarray(
+            model.predict(sub.X, sub.X_cond, sub.X_params), dtype=float
+        ).reshape(y_true.shape)
+        splits[name] = (y_true, y_pred)
+    if summary["held_out_split"] not in splits:
+        return None
+
+    out = figure_dir() / f"{label}__rmse_vs_k_pub.{extension}"
+    plot_rmse_vs_k_pub(np.asarray(td.k, dtype=float), splits, out,
+                       held=summary["held_out_split"], snapshot=snapshot, cosmo=cosmo)
+    return out
+
+
+# Reference accuracy level [%] drawn on the percentage-error figure (y = 1% on
+# the RMS panel, y = +-1% on the signed-error panel).
+_FRAC_ERR_REF_PCT = 1.0
+
+
+def _write_frac_err_vs_k_figure(
+    model, td: TrainingData, masks: dict, label: str, summary: dict, extension: str = "png"
+) -> Path | None:
+    """Write the percentage-error companion of :func:`_write_rmse_vs_k_pub_figure`.
+
+    Same two-panel layout and splits, with every residual expressed relative to
+    the truth, ``100 * (pred - true) / true`` [%] (the module's ``pred - true``
+    sign convention, normalised per bin):
+
+    - **top** -- per-k RMS of the percentage error across the rows of each
+      non-empty split (train / val / test).
+    - **bottom** -- the held-out signed percentage error: median with 16-84 and
+      5-95 percentile bands across curves, per k bin, against ``y = 0``.
+
+    Both panels carry a dashed 1% reference (:data:`_FRAC_ERR_REF_PCT`): ``y = 1``
+    on the top panel, ``y = +-1`` on the bottom.
+
+    Relative error is the natural accuracy scale for SP(k) = P_total/P_DM: an
+    absolute residual of 0.01 is a 1% error at SP ~ 1 but ~2% at SP ~ 0.5, so
+    the absolute-RMSE figure under-weights the most suppressed curves.
+
+    Skipped (returns None) for ``single_k`` targets, as the absolute figure is,
+    and -- with a warning -- if any true SP(k) is non-positive, where the
+    percentage is undefined. matplotlib is imported lazily (Agg backend).
     """
     try:
         import matplotlib
@@ -264,8 +436,15 @@ def _write_rmse_vs_k_figure(
     except ImportError:  # pragma: no cover - matplotlib is in the env
         return None
 
-    # single_k yields a 1-D target (one k bin); a per-k RMSE curve is undefined.
     if np.asarray(td.y).ndim < 2:
+        return None
+    if np.any(np.asarray(td.y, dtype=float) <= 0.0):
+        import warnings
+        warnings.warn(
+            "frac_err_vs_k skipped: the target has non-positive SP(k) values, "
+            "so (pred - true) / true is undefined.",
+            stacklevel=2,
+        )
         return None
 
     k = np.asarray(td.k)
@@ -279,40 +458,46 @@ def _write_rmse_vs_k_figure(
         if mask is None or not np.asarray(mask).any():
             continue
         sub = _subset(td, mask)
-        y_true = np.asarray(sub.y)
+        y_true = np.asarray(sub.y, dtype=float)
         y_pred = np.asarray(
-            model.predict(sub.X, sub.X_cond, sub.X_params)
+            model.predict(sub.X, sub.X_cond, sub.X_params), dtype=float
         ).reshape(y_true.shape)
-        rmse_k = np.sqrt(np.mean((y_pred - y_true) ** 2, axis=0))  # (n_k,)
-        ax.plot(k, rmse_k, marker=".", label=f"{name} (n={int(np.asarray(mask).sum())})")
+        pct = 100.0 * (y_pred - y_true) / y_true
+        rms_k = np.sqrt(np.mean(pct ** 2, axis=0))  # (n_k,)
+        ax.plot(k, rms_k, marker=".", label=f"{name} (n={int(np.asarray(mask).sum())})")
         plotted = True
 
     if not plotted:
         plt.close(fig)
         return None
 
-    ax.set_ylabel("RMSE of SP(k)")
-    ax.set_title(f"{label}\nper-k RMSE (top) and held-out residual spread (bottom)")
+    ax.axhline(_FRAC_ERR_REF_PCT, color="0.4", linestyle="--", linewidth=1,
+               label=f"{_FRAC_ERR_REF_PCT:g}%")
+    ax.set_ylabel("RMS of (pred - true) / true [%]")
+    ax.set_title(f"{label}\nper-k RMS % error (top) and held-out % error spread (bottom)")
     ax.legend()
 
-    # Bottom: signed-residual percentile envelope on the held-out fold.
     held = summary["held_out_split"]
     _sub, y_true_h, y_pred_h = _held_out_true_pred(model, td, masks, summary)
-    resid = y_pred_h - y_true_h  # sign convention: pred - true (module docstring)
-    p05, p16, p50, p84, p95 = np.percentile(resid, [5, 16, 50, 84, 95], axis=0)
+    pct_h = 100.0 * (y_pred_h - y_true_h) / y_true_h
+    p05, p16, p50, p84, p95 = np.percentile(pct_h, [5, 16, 50, 84, 95], axis=0)
     ax_env.fill_between(k, p05, p95, color="C0", alpha=0.18, linewidth=0,
                         label="5-95%")
     ax_env.fill_between(k, p16, p84, color="C0", alpha=0.35, linewidth=0,
                         label="16-84%")
     ax_env.plot(k, p50, color="C0", marker=".", label="median (bias)")
     ax_env.axhline(0.0, color="k", linestyle=":", linewidth=1)
+    for sign in (1.0, -1.0):
+        ax_env.axhline(sign * _FRAC_ERR_REF_PCT, color="0.4", linestyle="--",
+                       linewidth=1,
+                       label=f"±{_FRAC_ERR_REF_PCT:g}%" if sign > 0 else None)
     ax_env.set_xscale("log")
     ax_env.set_xlabel("k [h/Mpc]")
-    ax_env.set_ylabel("residual (pred - true)")
-    ax_env.set_title(f"{held} signed residual ({resid.shape[0]} curves)", fontsize=9)
+    ax_env.set_ylabel("(pred - true) / true [%]")
+    ax_env.set_title(f"{held} signed % error ({pct_h.shape[0]} curves)", fontsize=9)
     ax_env.legend(fontsize=8)
 
-    out = figure_dir() / f"{label}__rmse_vs_k.{extension}"
+    out = figure_dir() / f"{label}__frac_err_vs_k.{extension}"
     fig.tight_layout()
     fig.savefig(out)
     plt.close(fig)
@@ -523,7 +708,7 @@ def _per_curve_rmse_metrics(
     parameters) and the aligned ``worst_sim_rmse``, both in descending RMSE.
 
     Returns None for a 1-D (``single_k``) target -- a per-k RMSE per curve is
-    undefined -- mirroring :func:`_write_rmse_vs_k_figure`.
+    undefined -- mirroring :func:`_write_rmse_vs_k_pub_figure`.
 
     Args:
         model: The fitted model.
@@ -746,7 +931,7 @@ def _write_per_curve_rmse_figure(
 
     Each held-out ``(sim, nd)`` curve contributes one RMSE (across k bins);
     vertical lines mark the median and the 90th percentile. Skipped for a 1-D
-    ``single_k`` target (no per-k curve), mirroring :func:`_write_rmse_vs_k_figure`.
+    ``single_k`` target (no per-k curve), mirroring :func:`_write_rmse_vs_k_pub_figure`.
     matplotlib is imported lazily (Agg backend). Returns the written path, or None
     if matplotlib is unavailable or the figure was skipped.
     """
@@ -1519,9 +1704,22 @@ def _write_latent_traversal_figure(
     # line up with the profile width (e.g. a cropped or augmented feature axis).
     X_all = np.asarray(td.X, dtype=float)
     radii = np.asarray(td.radii_mpch, dtype=float)
-    radii_are_real = radii.size == X_all.shape[1]
-    r_axis = radii if radii_are_real else np.arange(X_all.shape[1], dtype=float)
-    p_lo, p_med, p_hi = np.percentile(X_all, [16, 50, 84], axis=0)
+    # With the fgas_std input the profile is X = [f_gas, log10 sigma_fgas] (twice the
+    # radial width) and the linear sigma_fgas rides along in td.X_std. Then the row
+    # shows f_gas at the radii with its sigma_fgas error bars, not the 2 x n_r
+    # concatenated vector against a bin index. Recognised only when the error columns
+    # are exactly log10(X_std), so no other augmented feature axis is mistaken for it.
+    x_std = None if td.X_std is None else np.asarray(td.X_std, dtype=float)
+    n_r = radii.size
+    profile_with_err = (
+        x_std is not None and x_std.shape == (X_all.shape[0], n_r)
+        and X_all.shape[1] == 2 * n_r and np.all(x_std > 0)
+        and np.allclose(X_all[:, n_r:], np.log10(x_std))
+    )
+    fgas_all = X_all[:, :n_r] if profile_with_err else X_all
+    radii_are_real = radii.size == fgas_all.shape[1]
+    r_axis = radii if radii_are_real else np.arange(fgas_all.shape[1], dtype=float)
+    p_lo, p_med, p_hi = np.percentile(fgas_all, [16, 50, 84], axis=0)
 
     # ncols follows the picks actually returned, not len(percentiles):
     # _ladder_picks drops a duplicate when two percentiles collide on one row,
@@ -1574,8 +1772,14 @@ def _write_latent_traversal_figure(
         ax_p.fill_between(r_axis, p_lo, p_hi, color="grey", alpha=0.22,
                           linewidth=0, label="data 16-84%")
         ax_p.plot(r_axis, p_med, color="grey", linestyle=":", linewidth=1)
-        ax_p.plot(r_axis, X_all[i], color="black", linewidth=1.5,
-                  label=r"this column's $f_{gas}$")
+        if profile_with_err:
+            # Measured bins as points with the halo-to-halo sigma_fgas, unjoined.
+            ax_p.errorbar(r_axis, fgas_all[i], yerr=x_std[i], fmt="o", color="black",
+                          markersize=3.5, elinewidth=1.0, capsize=2,
+                          label=r"this column's $f_{gas}\pm\sigma_{f_{gas}}$")
+        else:
+            ax_p.plot(r_axis, X_all[i], color="black", linewidth=1.5,
+                      label=r"this column's $f_{gas}$")
         if radii_are_real:
             ax_p.set_xscale("log")
             _thin_log_ticks(ax_p, r_axis)
@@ -1791,9 +1995,13 @@ def run_training(
     if write_figures:
         label = _figure_label(record.run_id, run_config.model)
         _write_pred_vs_true_figure(model, td, masks, label, summary)
-        _write_rmse_vs_k_figure(model, td, masks, label, summary)
+        _write_rmse_vs_k_pub_figure(
+            model, td, masks, label, summary,
+            snapshot=data_config.snapshot, cosmo=data_config.include_camels_params,
+        )
+        _write_frac_err_vs_k_figure(model, td, masks, label, summary)
         # Part 1: per-curve / worst-curve diagnostics for every model (both
-        # self-skip for a 1-D single_k target, as _write_rmse_vs_k_figure does).
+        # self-skip for a 1-D single_k target, as _write_rmse_vs_k_pub_figure does).
         _write_per_curve_rmse_figure(model, td, masks, label, summary)
         _write_worst_curves_figure(model, td, masks, label, summary)
         # Residual map + depth-stratified ladder. Always-on: the bands need

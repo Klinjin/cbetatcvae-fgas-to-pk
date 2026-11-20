@@ -1,0 +1,96 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.11.0/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.11.0/Miniforge3-26.9.4-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.11.0/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-16507d91be0dc1ce4f94c04d4d0430210b8685d9/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd0 20261118T202614Z__8aa507b2__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd0 20261118T202624Z__5dcfedb1__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd0 20261118T202633Z__4a26d7f0__2e53c8d
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd0 20261118T202642Z__8c9993de__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd0 20261118T202651Z__a25169e3__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd0 20261118T202700Z__0dd4ed1f__2e53c8d
+snap74 nofb  nd_2 seed 0 rmse 0.0459
+snap74 nofb  nd_2 seed 1 rmse 0.0458
+snap74 nofb  nd_2 seed 2 rmse 0.0456
+snap74 nofb  nd_0 seed 0 rmse 0.0504
+snap74 nofb  nd_0 seed 1 rmse 0.0505
+snap74 nofb  nd_0 seed 2 rmse 0.0504
+snap82 nofb  nd_2 seed 0 rmse 0.0490
+snap82 nofb  nd_2 seed 1 rmse 0.0482
+snap82 nofb  nd_2 seed 2 rmse 0.0491
+snap82 nofb  nd_0 seed 0 rmse 0.0516
+snap82 nofb  nd_0 seed 1 rmse 0.0512
+snap82 nofb  nd_0 seed 2 rmse 0.0519
+| snap | input | nd | n̄ [(Mpc/h)⁻³] | RMSE (all k) | RMSE k∈(0,1] | RMSE k∈(1,3] | RMSE k∈(3,10] |
+|---|---|---|---|---|---|---|---|
+| 74 | nofb | nd_2 | 0.0005 | 0.0458 ± 0.0002 | 0.0076 ± 0.0001 | 0.0206 ± 0.0002 | 0.0531 ± 0.0002 |
+| 74 | nofb | nd_0 | 0.0001 | 0.0504 ± 0.0000 | 0.0084 ± 0.0002 | 0.0238 ± 0.0010 | 0.0585 ± 0.0001 |
+| 82 | nofb | nd_2 | 0.008 | 0.0488 ± 0.0005 | 0.0124 ± 0.0003 | 0.0416 ± 0.0010 | 0.0533 ± 0.0005 |
+| 82 | nofb | nd_0 | 0.001 | 0.0516 ± 0.0004 | 0.0131 ± 0.0003 | 0.0440 ± 0.0012 | 0.0564 ± 0.0003 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/nd_compare/nd_compare_rmse_vs_k_nd2_vs_nd0.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd1 20261118T202720Z__4f0cbdd7__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd1 20261118T202730Z__cfd307fa__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd1 20261118T202740Z__abac61df__2e53c8d
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd1 20261118T202750Z__288e7aa8__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd1 20261118T202759Z__fae3dae7__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd1 20261118T202808Z__d8bfcd51__2e53c8d
+snap74 nofb  nd_2 seed 0 rmse 0.0459
+snap74 nofb  nd_2 seed 1 rmse 0.0458
+snap74 nofb  nd_2 seed 2 rmse 0.0456
+snap74 nofb  nd_1 seed 0 rmse 0.0468
+snap74 nofb  nd_1 seed 1 rmse 0.0467
+snap74 nofb  nd_1 seed 2 rmse 0.0470
+snap82 nofb  nd_2 seed 0 rmse 0.0490
+snap82 nofb  nd_2 seed 1 rmse 0.0482
+snap82 nofb  nd_2 seed 2 rmse 0.0491
+snap82 nofb  nd_1 seed 0 rmse 0.0484
+snap82 nofb  nd_1 seed 1 rmse 0.0489
+snap82 nofb  nd_1 seed 2 rmse 0.0475
+| snap | input | nd | n̄ [(Mpc/h)⁻³] | RMSE (all k) | RMSE k∈(0,1] | RMSE k∈(1,3] | RMSE k∈(3,10] |
+|---|---|---|---|---|---|---|---|
+| 74 | nofb | nd_2 | 0.0005 | 0.0458 ± 0.0002 | 0.0076 ± 0.0001 | 0.0206 ± 0.0002 | 0.0531 ± 0.0002 |
+| 74 | nofb | nd_1 | 0.00028 | 0.0468 ± 0.0001 | 0.0076 ± 0.0001 | 0.0203 ± 0.0006 | 0.0545 ± 0.0002 |
+| 82 | nofb | nd_2 | 0.008 | 0.0488 ± 0.0005 | 0.0124 ± 0.0003 | 0.0416 ± 0.0010 | 0.0533 ± 0.0005 |
+| 82 | nofb | nd_1 | 0.004 | 0.0482 ± 0.0007 | 0.0123 ± 0.0002 | 0.0409 ± 0.0008 | 0.0528 ± 0.0008 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/nd_compare/nd_compare_rmse_vs_k_nd2_vs_nd1.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd3 20261118T202827Z__30516943__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd3 20261118T202836Z__8ed36c5d__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap74_nd3 20261118T202845Z__f8868892__2e53c8d
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd3 20261118T202854Z__4f9b4772__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd3 20261118T202903Z__21811bd7__2e53c8d
+nd_compare/arcmin9nofb_noparams_kmax10_snap82_nd3 20261118T202913Z__641af85e__2e53c8d
+snap74 nofb  nd_2 seed 0 rmse 0.0459
+snap74 nofb  nd_2 seed 1 rmse 0.0458
+snap74 nofb  nd_2 seed 2 rmse 0.0456
+snap74 nofb  nd_3 seed 0 rmse 0.0445
+snap74 nofb  nd_3 seed 1 rmse 0.0446
+snap74 nofb  nd_3 seed 2 rmse 0.0443
+snap82 nofb  nd_2 seed 0 rmse 0.0490
+snap82 nofb  nd_2 seed 1 rmse 0.0482
+snap82 nofb  nd_2 seed 2 rmse 0.0491
+snap82 nofb  nd_3 seed 0 rmse 0.0526
+snap82 nofb  nd_3 seed 1 rmse 0.0519
+snap82 nofb  nd_3 seed 2 rmse 0.0543
+| snap | input | nd | n̄ [(Mpc/h)⁻³] | RMSE (all k) | RMSE k∈(0,1] | RMSE k∈(1,3] | RMSE k∈(3,10] |
+|---|---|---|---|---|---|---|---|
+| 74 | nofb | nd_2 | 0.0005 | 0.0458 ± 0.0002 | 0.0076 ± 0.0001 | 0.0206 ± 0.0002 | 0.0531 ± 0.0002 |
+| 74 | nofb | nd_3 | 0.001 | 0.0445 ± 0.0002 | 0.0077 ± 0.0002 | 0.0219 ± 0.0006 | 0.0514 ± 0.0002 |
+| 82 | nofb | nd_2 | 0.008 | 0.0488 ± 0.0005 | 0.0124 ± 0.0003 | 0.0416 ± 0.0010 | 0.0533 ± 0.0005 |
+| 82 | nofb | nd_3 | 0.02 | 0.0529 ± 0.0012 | 0.0132 ± 0.0003 | 0.0457 ± 0.0015 | 0.0578 ± 0.0013 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-11/11-18/nd_compare/nd_compare_rmse_vs_k_nd2_vs_nd3.png

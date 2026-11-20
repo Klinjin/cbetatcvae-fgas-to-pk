@@ -1,0 +1,10 @@
+{
+  "columns": [
+    "log10_number_density",
+    "redshift"
+  ],
+  "definition": {
+    "log10_number_density": "log10 of the halo-sample number density n [(Mpc/h)^-3] used to stack the profile",
+    "redshift": "snapshot redshift (DataConfig.redshift): 0.47 for snap74, 0.21 for snap82"
+  }
+}

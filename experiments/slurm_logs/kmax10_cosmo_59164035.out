@@ -1,0 +1,64 @@
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap74/20261001T163229Z__0820f0df__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap74/20261001T163239Z__9bf342c4__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap74/20261001T163249Z__91be8637__2e53c8d
+{
+  "run": "20261001T163249Z__91be8637__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.035184285424559654,
+    "rmse_median_over_k": 0.015936199069960053,
+    "frac_k_bins_rmse_below_1pct": 0.11392405063291139
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.041879837920869266,
+    "rmse_median_over_k": 0.02602169684960659,
+    "frac_k_bins_rmse_below_1pct": 0.0759493670886076
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.032791823218775884,
+    "rmse_median_over_k": 0.01982653220815481,
+    "frac_k_bins_rmse_below_1pct": 0.10126582278481013
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.26582278481012656
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/arcmin_cosmo_kmax10_snap74/20261001T163249Z__91be8637__2e53c8d__rmse_vs_k_pub.png
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_cosmo_kmax10_snap74/20261001T163309Z__4ff07158__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_cosmo_kmax10_snap74/20261001T163318Z__874467af__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_cosmo_kmax10_snap74/20261001T163327Z__a8629cf6__2e53c8d
+{
+  "run": "20261001T163327Z__a8629cf6__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.031109118951730394,
+    "rmse_median_over_k": 0.015258235869022805,
+    "frac_k_bins_rmse_below_1pct": 0.13924050632911392
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.037849195102642536,
+    "rmse_median_over_k": 0.026469945515784778,
+    "frac_k_bins_rmse_below_1pct": 0.0759493670886076
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.03345910321510012,
+    "rmse_median_over_k": 0.019424178297591452,
+    "frac_k_bins_rmse_below_1pct": 0.12658227848101267
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.25316455696202533
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/mpch_cosmo_kmax10_snap74/20261001T163327Z__a8629cf6__2e53c8d__rmse_vs_k_pub.png

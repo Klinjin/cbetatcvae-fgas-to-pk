@@ -1,0 +1,39 @@
+# A/B (radial design) arm arcmin (all bins): the ARCMIN-design dataset with all 18 bins to the 20 cMpc/h edge
+# (scripts/build_dataset_eighth_gen_arcmin.py --all-bins; outer 9 bins vary per sim in angle and radius).
+# radial_range_mpch: null (required: radii_mpch is a nominal per-bin median). Otherwise identical to the other arms.
+# DataConfig: eighth-gen snap74 dataset built DIRECTLY from the
+# producer's compiled f_gas files
+#   DeltaSigma_kSZ_over_DeltaSigma_total_profiles_snap74_nd_*_n_*_eighth_gen.npz
+# (comoving Mpc/h design, halos ranked by saved stellar mass at production) by
+# scripts/build_dataset_eighth_gen_compiled.py.
+#
+# number_density_indices [2] -> n = 5.0e-4 (Mpc/h)^-3, 62 halos (snap74 bins).
+# Target: full SP(k) curve, 255 bins 0.178 -- 32.1 h/Mpc (Pk_512_3Dfield grid).
+# Caveat (CLAUDE.md): SP(k) = P_total/P_DM within the hydro run is a proxy that
+# biases at k >~ 5 h/Mpc in a feedback-correlated way.
+#
+#     python scripts/run.py --config-data scripts/configs/data/config_eighth_gen_compiled_snap74.yaml \
+#                           --config-run  scripts/configs/run/cvae_noise.yaml
+
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 74
+redshift: 0.47
+source: lindajin
+rank: mstar
+tag: '20260930-arcmin-all'
+sim_ids: null
+
+number_density_indices: [2]
+radial_range_mpch: null
+radial_range_arcmin: null   # arcmin-design datasets only: 6 = bins <= 6 arcmin (9 bins); null = all bins
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: true
+camels_param_indices: null
+camels_param_names: [Omega0, sigma8, OmegaBaryon, HubbleParam, n_s]
+
+target_mode: curve
+k_target: null
+k_range: null

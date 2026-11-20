@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 import fgas_spk.schema as S
 import fgas_spk.train as T
@@ -296,7 +297,9 @@ def test_new_figures_render(tmp_path, monkeypatch):
         lambda: T._write_spread_vs_error_figure(model, td, masks, label, summary, seed=0),
         lambda: T._write_coverage_figure(model, td, masks, label, summary, seed=0),
         lambda: T._write_latent_norm_figure(model, td, masks, label),
-        lambda: T._write_rmse_vs_k_figure(model, td, masks, label, summary),
+        lambda: T._write_rmse_vs_k_pub_figure(model, td, masks, label, summary,
+                                              snapshot=74, cosmo=False),
+        lambda: T._write_frac_err_vs_k_figure(model, td, masks, label, summary),
         lambda: T._write_residual_map_figure(model, td, masks, label, summary, seed=0),
     ]
     for write in writers:
@@ -450,10 +453,10 @@ def test_rmse_vs_depth_correlation_matches_a_direct_computation():
     assert -1.0 <= rec["spearman_r"] <= 1.0
 
 
-# --- rmse_vs_k: the added envelope panel ------------------------------------
+# --- rmse_vs_k_pub: held-out envelope panel ---------------------------------
 
 def test_rmse_vs_k_envelope_uses_signed_residual_percentiles(tmp_path, monkeypatch):
-    """The plotted bands are the 5-95 and 16-84 percentiles of (pred - true)."""
+    """The plotted bands are the 5-95 and 16-84 percentiles of 100 * (pred - true)."""
     monkeypatch.setattr(T, "figure_dir", lambda subdir=None: tmp_path)
     import matplotlib
     matplotlib.use("Agg")
@@ -470,11 +473,12 @@ def test_rmse_vs_k_envelope_uses_signed_residual_percentiles(tmp_path, monkeypat
 
     td = _td()
     model, masks, summary = _fit(td)
-    out = T._write_rmse_vs_k_figure(model, td, masks, "lbl", summary)
+    out = T._write_rmse_vs_k_pub_figure(model, td, masks, "lbl", summary)
     assert out is not None and Path(out).exists()
+    assert Path(out).name == "lbl__rmse_vs_k_pub.png"
 
     _sub, y_true, y_pred = T._held_out_true_pred(model, td, masks, summary)
-    resid = y_pred - y_true
+    resid = 100.0 * (y_pred - y_true)  # percent of the unsuppressed SP = 1
     p05, p16, p84, p95 = np.percentile(resid, [5, 16, 84, 95], axis=0)
     assert len(bands) == 2
     assert np.allclose(bands[0][0], p05) and np.allclose(bands[0][1], p95)
@@ -485,7 +489,62 @@ def test_rmse_vs_k_still_skipped_for_single_k(tmp_path, monkeypatch):
     monkeypatch.setattr(T, "figure_dir", lambda subdir=None: tmp_path)
     td = _td(single_k=True)
     model, masks, summary = _fit(td)
-    assert T._write_rmse_vs_k_figure(model, td, masks, "lbl", summary) is None
+    assert T._write_rmse_vs_k_pub_figure(model, td, masks, "lbl", summary) is None
+
+
+# --- frac_err_vs_k: percentage companion of rmse_vs_k ----------------------
+
+def test_frac_err_vs_k_plots_percentage_error(tmp_path, monkeypatch):
+    """Top curves are per-k RMS of 100*(pred-true)/true; bands its percentiles."""
+    monkeypatch.setattr(T, "figure_dir", lambda subdir=None: tmp_path)
+    import matplotlib
+    matplotlib.use("Agg")
+    from matplotlib.axes import Axes
+
+    bands: list = []
+    lines: list = []
+    real_fill, real_plot = Axes.fill_between, Axes.plot
+
+    def spy_fill(self, x, y1, y2=0, **kwargs):
+        bands.append((np.asarray(y1), np.asarray(y2)))
+        return real_fill(self, x, y1, y2, **kwargs)
+
+    def spy_plot(self, *args, **kwargs):
+        if len(args) >= 2:
+            lines.append((kwargs.get("label"), np.asarray(args[1])))
+        return real_plot(self, *args, **kwargs)
+
+    monkeypatch.setattr(Axes, "fill_between", spy_fill)
+    monkeypatch.setattr(Axes, "plot", spy_plot)
+
+    td = _td()
+    model, masks, summary = _fit(td)
+    out = T._write_frac_err_vs_k_figure(model, td, masks, "lbl", summary)
+    assert out is not None and Path(out).exists() and "frac_err_vs_k" in Path(out).name
+
+    _sub, y_true, y_pred = T._held_out_true_pred(model, td, masks, summary)
+    pct = 100.0 * (y_pred - y_true) / y_true
+    p05, p16, p50, p84, p95 = np.percentile(pct, [5, 16, 50, 84, 95], axis=0)
+    assert len(bands) == 2
+    assert np.allclose(bands[0][0], p05) and np.allclose(bands[0][1], p95)
+    assert np.allclose(bands[1][0], p16) and np.allclose(bands[1][1], p84)
+    test_line = [y for lab, y in lines if lab and lab.startswith("test")][0]
+    assert np.allclose(test_line, np.sqrt(np.mean(pct ** 2, axis=0)))
+    median_line = [y for lab, y in lines if lab == "median (bias)"][0]
+    assert np.allclose(median_line, p50)
+
+
+def test_frac_err_vs_k_skipped_for_single_k_and_nonpositive_target(tmp_path, monkeypatch):
+    monkeypatch.setattr(T, "figure_dir", lambda subdir=None: tmp_path)
+    td = _td(single_k=True)
+    model, masks, summary = _fit(td)
+    assert T._write_frac_err_vs_k_figure(model, td, masks, "lbl", summary) is None
+
+    td = _td()
+    model, masks, summary = _fit(td)
+    td.y[0, 0] = 0.0  # percentage undefined -> skipped with a warning
+    with pytest.warns(UserWarning, match="non-positive"):
+        assert T._write_frac_err_vs_k_figure(model, td, masks, "lbl", summary) is None
 
 
 # --- aggregate latent density ----------------------------------------------

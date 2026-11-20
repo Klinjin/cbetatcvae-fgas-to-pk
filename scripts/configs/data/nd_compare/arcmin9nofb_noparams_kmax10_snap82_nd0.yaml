@@ -1,0 +1,27 @@
+# arcmin9nofb_noparams_kmax10_snap82_nd2/20261002T192614Z__d08cce03__2e53c8d/config_data.yaml with
+# number_density_indices [2] -> [0] and nothing else (scripts/nd_compare.py).
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 82
+redshift: 0.21
+source: lindajin
+rank: mstar
+tag: 20261001-arcmin-all-nofb
+sim_ids: null
+number_density_indices:
+- 0
+radial_range_mpch: null
+radial_range_arcmin:
+- 0.0
+- 6.0
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: false
+camels_param_indices: null
+camels_param_names: null
+target_mode: k_range
+k_target: null
+k_range:
+- 0.0
+- 10.0

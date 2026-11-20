@@ -1,0 +1,42 @@
+# arcmin9_cosmo_kmax10_snap74_nd2/20261001T163947Z__6399848f__2e53c8d/config_data.yaml with
+# number_density_indices [2] -> [4] and nothing else (scripts/nd_compare.py).
+# Radial input: 9 arcmin-design bins (snap74), NOT the full 18-bin grid.
+# radial_range_arcmin: 6 states the same 9-bin selection explicitly (a no-op on this pre-cut dataset).
+# radial_range_mpch: null applies no further crop -- the loader passes every bin of the
+# dataset through. The <= 6 arcmin cut (inclusive) was applied when the dataset was built
+# (scripts/build_dataset_eighth_gen_arcmin.py), and this config selects that dataset via
+# tag 20260930-arcmin-le6: fgas_spk__CAMELS-IllustrisTNG-L50n512-SB35__snap074_z0.47__src-lindajin__rank-mstar__20260930-arcmin-le6.npz
+#   fgas shape (sims, nd, radii) = (1024, 5, 9); loaded profile input X = (1024, 9)
+#   radii_arcmin = [1, 1.625, 2.25, 2.875, 3.5, 4.125, 4.75, 5.375, 6] (identical in every sim)
+#   comoving radii vary per sim with cosmology: per-bin median 0.363 -- 2.175 Mpc/h
+#   (innermost bin 0.341 -- 0.390, outermost 2.049 -- 2.339 Mpc/h across sims)
+# Because the bins sit at different comoving radii per sim, the stored radii_mpch is only a
+# nominal per-bin median, and the loader refuses a non-null radial_range_mpch on this dataset.
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 74
+redshift: 0.47
+source: lindajin
+rank: mstar
+tag: 20260930-arcmin-le6
+sim_ids: null
+number_density_indices:
+- 4
+radial_range_mpch: null
+radial_range_arcmin: 6
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: true
+camels_param_indices: null
+camels_param_names:
+- Omega0
+- sigma8
+- OmegaBaryon
+- HubbleParam
+- n_s
+target_mode: k_range
+k_target: null
+k_range:
+- 0.0
+- 10.0

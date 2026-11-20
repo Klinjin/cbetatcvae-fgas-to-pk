@@ -1,0 +1,55 @@
+# RunConfig for the JOINT dual_vae (scripts/joint_dual_vae.py): one Arm P
+# composite over both snapshots (snap74 DESI LRG z=0.47, snap82 DESI BGS z=0.21)
+# and all five number densities of each, with context = [X_cond, X_params] =
+# [log10 n, z, Omega0, sigma8, OmegaBaryon, HubbleParam, n_s].
+#
+# Arm P hyperparameters exactly as scripts/configs/run/dual_vae_pca_vae.yaml (the
+# designated programme primary) with two changes:
+#
+# * val_grouped: true -- each simulation contributes 10 rows (5 n x 2 z) sharing
+#   its two SP(k) targets, so the internal best-epoch holdouts of the VAE-Y codec
+#   and the MDN rung are drawn by simulation (as cvae_noise_joint.yaml does for
+#   the joint cVAE); a row-level holdout would validate on trained-on targets.
+# * split.seed: 10 -- the outer split of the joint cVAE and the per-nd cVAEs, so
+#   all three are scored on identical held-out simulations (the dual-VAE
+#   programme's pinned seed was 100).
+#
+# Context routing in Arm P: the PCA x-codec is unconditional and the MDN maps
+# x-codes to y-codes without context, so z, n and cosmology enter only through
+# the VAE-Y encoder/decoder.
+
+model: dual_vae               # registry name (fgas_spk.models.REGISTRY)
+model_params:
+  codec_x: pca
+  codec_y: vae
+  latent_dim_x: 4             # PCA codec dimension (best Stage 4.0 reference arm)
+  latent_dim_y: 3
+  beta_x: 0.01                # inert for a pca codec
+  beta_y: 1.0e-4
+  hidden: 128
+  n_layers: 2
+  epochs: 5000                # VAE codec schedule (best-epoch restore inside)
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  dropout: 0.0
+  batch_size: 128
+  anneal_epochs: null         # -> epochs // 4, linear KL warm-up
+  val_frac: 0.1               # internal holdout for best-epoch restore
+  val_grouped: true           # internal holdouts by simulation (10 rows/sim share 2 targets)
+  mapping: mdn                # rung 3 (probabilistic; predict_samples enabled)
+  mdn_components: 3
+  map_epochs: 2000
+
+seed: 0
+
+# Outer grouped-by-sim_index split: the joint cVAE's (seed 10).
+split:
+  train_frac: 0.7
+  val_frac: 0.1
+  test_frac: 0.2
+  seed: 10
+
+evaluation:
+  suppressed_thresholds: [0.95, 0.9, 0.8]
+
+write_root: null

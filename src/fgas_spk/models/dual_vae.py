@@ -93,6 +93,12 @@ class DualVae:
         anneal_epochs (int | None): VAE KL warm-up; None -> epochs // 4.
         val_frac (float): Internal holdout for best-epoch restore. Defaults
             to 0.1.
+        val_grouped (bool): Draw every internal holdout (y-codec, x-codec,
+            torch mapping rung) by simulation (``training_data.sim_index``)
+            rather than by row, as ``Cvae(val_grouped=True)``. Needed when
+            several rows share one target (one simulation stacked at several
+            number densities / snapshots): a row-level holdout would select
+            the best epoch on targets the networks train on. Defaults to False.
         mapping (str): ``"ridge"`` / ``"mlp"`` / ``"mdn"``. Defaults to
             ``"mdn"`` (the probabilistic rung).
         mdn_components (int): MDN mixture size K. Defaults to 3.
@@ -124,6 +130,7 @@ class DualVae:
         batch_size: int = 128,
         anneal_epochs: int | None = None,
         val_frac: float = 0.1,
+        val_grouped: bool = False,
         mapping: str = "mdn",
         mdn_components: int = 3,
         map_epochs: int = 2000,
@@ -153,6 +160,7 @@ class DualVae:
         self.batch_size = batch_size
         self.anneal_epochs = anneal_epochs
         self.val_frac = val_frac
+        self.val_grouped = val_grouped
         self.mapping = mapping
         self.mdn_components = mdn_components
         self.map_epochs = map_epochs
@@ -181,6 +189,7 @@ class DualVae:
         self._uses_cond = training_data.X_cond is not None
         self._uses_params = training_data.X_params is not None
         ctx = self._context(training_data.X_cond, training_data.X_params)
+        groups = np.asarray(training_data.sim_index) if self.val_grouped else None
 
         vae_kw = dict(
             hidden=self.hidden, n_layers=self.n_layers, epochs=self.epochs,
@@ -193,14 +202,14 @@ class DualVae:
             if self.codec_y == "vae"
             else PcaCodec(latent_dim=self.latent_dim_y, seed=self.seed)
         )
-        self._y_codec.fit(y, ctx)
+        self._y_codec.fit(y, ctx, groups=groups)
 
         self._x_codec = (
             GaussianVAE(latent_dim=self.latent_dim_x, beta=self.beta_x, **vae_kw)
             if self.codec_x == "vae"
             else PcaCodec(latent_dim=self.latent_dim_x, seed=self.seed)
         )
-        self._x_codec.fit(X, ctx)
+        self._x_codec.fit(X, ctx, groups=groups)
 
         mu1 = self._x_codec.encode(X, ctx)
         mu2 = self._y_codec.encode(y, ctx)
@@ -216,7 +225,7 @@ class DualVae:
             self._map = LatentMapMLP(**map_kw)
         else:
             self._map = LatentMapMDN(n_components=self.mdn_components, **map_kw)
-        self._map.fit(mu1, mu2)
+        self._map.fit(mu1, mu2, groups=groups)
 
         self.history = [
             {"phase": phase, **row}

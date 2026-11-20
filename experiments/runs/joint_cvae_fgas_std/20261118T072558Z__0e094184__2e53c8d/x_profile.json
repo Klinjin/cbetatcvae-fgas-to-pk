@@ -1,0 +1,6 @@
+{
+  "n_columns": 18,
+  "columns": "9 x f_gas(R)/f_b (1--6 arcmin), then 9 x log10 sigma_fgas(R) on the same bins",
+  "sigma_fgas": "the dataset's fgas_std = the compiled file's prof_std (build_fgas_spk_from_compiled): |f_gas| * sqrt((sigma_ion/DS_ion)^2 + (sigma_tot/DS_tot)^2), f_gas = DS_ion/DS_tot/f_b, with sigma_* the halo-to-halo std of Delta Sigma_kSZ (ionised) and Delta Sigma_total over the selected halos x 3 projections (SimulationStacker test_CAMELS_eighth_gen.ipynb, _stack_ratio)",
+  "log10": "sigma_fgas is strictly positive and spans >1 dex across n and R; the model z-scores each column"
+}

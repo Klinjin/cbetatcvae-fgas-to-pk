@@ -1,0 +1,196 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.8.1/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.1.0/Miniforge3-25.11.0-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.8.1/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+all /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo_kmax10_snap74/20261001T174926Z__bff8b71e__2e53c8d
+all /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo_kmax10_snap74/20261001T174938Z__7c7ae354__2e53c8d
+all /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo_kmax10_snap74/20261001T174948Z__e792b039__2e53c8d
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+none /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_noparams_kmax10_snap74/20261001T174958Z__96be4a40__2e53c8d
+none /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_noparams_kmax10_snap74/20261001T175007Z__d27cdda4__2e53c8d
+none /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_noparams_kmax10_snap74/20261001T175017Z__c6045748__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0_kmax10_snap74/20261001T175026Z__2595e4ae__2e53c8d
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0_kmax10_snap74/20261001T175036Z__2ae3409b__2e53c8d
+drop-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0_kmax10_snap74/20261001T175045Z__f3feec04__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-sigma8_kmax10_snap74/20261001T175055Z__8b95667b__2e53c8d
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-sigma8_kmax10_snap74/20261001T175104Z__4941b486__2e53c8d
+drop-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-sigma8_kmax10_snap74/20261001T175114Z__2e7c2e86__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T175124Z__359408dd__2e53c8d
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T175134Z__48b35d4c__2e53c8d
+drop-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-OmegaBaryon_kmax10_snap74/20261001T175144Z__641f91e7__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-HubbleParam_kmax10_snap74/20261001T175154Z__4161de5b__2e53c8d
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-HubbleParam_kmax10_snap74/20261001T175204Z__7875adcb__2e53c8d
+drop-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-HubbleParam_kmax10_snap74/20261001T175214Z__192b399d__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-n_s_kmax10_snap74/20261001T175224Z__59436133__2e53c8d
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-n_s_kmax10_snap74/20261001T175234Z__bbf0ca3e__2e53c8d
+drop-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-n_s_kmax10_snap74/20261001T175243Z__90f6e5d2__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T175253Z__02f6b98f__2e53c8d
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T175303Z__f963881e__2e53c8d
+drop-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-drop-Omega0+OmegaBaryon_kmax10_snap74/20261001T175313Z__29c73000__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0_kmax10_snap74/20261001T175323Z__117b1197__2e53c8d
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0_kmax10_snap74/20261001T175333Z__01bd315e__2e53c8d
+only-Omega0 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0_kmax10_snap74/20261001T175342Z__198af9b0__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-sigma8_kmax10_snap74/20261001T175351Z__4d62cf31__2e53c8d
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-sigma8_kmax10_snap74/20261001T175401Z__a479da21__2e53c8d
+only-sigma8 /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-sigma8_kmax10_snap74/20261001T175411Z__1a1590af__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T175421Z__ee2243b3__2e53c8d
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T175430Z__376cefb7__2e53c8d
+only-OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-OmegaBaryon_kmax10_snap74/20261001T175440Z__d5f47427__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-HubbleParam_kmax10_snap74/20261001T175449Z__1998ba08__2e53c8d
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-HubbleParam_kmax10_snap74/20261001T175459Z__6aeeed1e__2e53c8d
+only-HubbleParam /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-HubbleParam_kmax10_snap74/20261001T175509Z__f1f981b3__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-n_s_kmax10_snap74/20261001T175518Z__b75dd51f__2e53c8d
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-n_s_kmax10_snap74/20261001T175527Z__a10aa45a__2e53c8d
+only-n_s /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-n_s_kmax10_snap74/20261001T175537Z__38e9d017__2e53c8d
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T175547Z__eaed85be__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T175556Z__80d49620__2e53c8d
+only-Omega0+OmegaBaryon /pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9nofb_cosmo-only-Omega0+OmegaBaryon_kmax10_snap74/20261001T175606Z__27c42839__2e53c8d
+seed 0 all                          rmse 0.0380
+seed 0 none                         rmse 0.0459
+seed 0 drop-Omega0                  rmse 0.0460
+seed 0 drop-sigma8                  rmse 0.0407
+seed 0 drop-OmegaBaryon             rmse 0.0444
+seed 0 drop-HubbleParam             rmse 0.0402
+seed 0 drop-n_s                     rmse 0.0386
+seed 0 drop-Omega0+OmegaBaryon      rmse 0.0458
+seed 0 only-Omega0                  rmse 0.0441
+seed 0 only-sigma8                  rmse 0.0460
+seed 0 only-OmegaBaryon             rmse 0.0467
+seed 0 only-HubbleParam             rmse 0.0447
+seed 0 only-n_s                     rmse 0.0455
+seed 0 only-Omega0+OmegaBaryon      rmse 0.0385
+seed 1 all                          rmse 0.0380
+seed 1 none                         rmse 0.0458
+seed 1 drop-Omega0                  rmse 0.0451
+seed 1 drop-sigma8                  rmse 0.0397
+seed 1 drop-OmegaBaryon             rmse 0.0440
+seed 1 drop-HubbleParam             rmse 0.0376
+seed 1 drop-n_s                     rmse 0.0375
+seed 1 drop-Omega0+OmegaBaryon      rmse 0.0449
+seed 1 only-Omega0                  rmse 0.0442
+seed 1 only-sigma8                  rmse 0.0457
+seed 1 only-OmegaBaryon             rmse 0.0460
+seed 1 only-HubbleParam             rmse 0.0446
+seed 1 only-n_s                     rmse 0.0453
+seed 1 only-Omega0+OmegaBaryon      rmse 0.0389
+seed 2 all                          rmse 0.0413
+seed 2 none                         rmse 0.0456
+seed 2 drop-Omega0                  rmse 0.0458
+seed 2 drop-sigma8                  rmse 0.0393
+seed 2 drop-OmegaBaryon             rmse 0.0441
+seed 2 drop-HubbleParam             rmse 0.0395
+seed 2 drop-n_s                     rmse 0.0394
+seed 2 drop-Omega0+OmegaBaryon      rmse 0.0454
+seed 2 only-Omega0                  rmse 0.0438
+seed 2 only-sigma8                  rmse 0.0456
+seed 2 only-OmegaBaryon             rmse 0.0458
+seed 2 only-HubbleParam             rmse 0.0444
+seed 2 only-n_s                     rmse 0.0455
+seed 2 only-Omega0+OmegaBaryon      rmse 0.0374
+| arm | conditioning | RMSE (all k) | RMSE k∈(0,1] | RMSE k∈(1,3] | RMSE k∈(3,10] | median_k RMSE(k) | frac k: RMSE<1% | recovered |
+|---|---|---|---|---|---|---|---|---|
+| all | Omega0, sigma8, OmegaBaryon, HubbleParam, n_s | 0.0391 ± 0.0019 | 0.0084 ± 0.0004 | 0.0251 ± 0.0014 | 0.0444 ± 0.0022 | 0.0357 ± 0.0026 | 0.0633 ± 0.0000 | 1.00 |
+| none | — | 0.0458 ± 0.0002 | 0.0076 ± 0.0001 | 0.0206 ± 0.0002 | 0.0531 ± 0.0002 | 0.0372 ± 0.0004 | 0.0633 ± 0.0000 | 0.00 |
+| drop-Omega0 | sigma8, OmegaBaryon, HubbleParam, n_s | 0.0456 ± 0.0005 | 0.0073 ± 0.0001 | 0.0209 ± 0.0003 | 0.0530 ± 0.0006 | 0.0374 ± 0.0003 | 0.0633 ± 0.0000 | 0.02 |
+| drop-sigma8 | Omega0, OmegaBaryon, HubbleParam, n_s | 0.0399 ± 0.0008 | 0.0091 ± 0.0004 | 0.0261 ± 0.0011 | 0.0452 ± 0.0009 | 0.0364 ± 0.0007 | 0.0591 ± 0.0073 | 0.88 |
+| drop-OmegaBaryon | Omega0, sigma8, HubbleParam, n_s | 0.0442 ± 0.0002 | 0.0072 ± 0.0003 | 0.0209 ± 0.0003 | 0.0512 ± 0.0002 | 0.0365 ± 0.0003 | 0.0675 ± 0.0073 | 0.24 |
+| drop-HubbleParam | Omega0, sigma8, OmegaBaryon, n_s | 0.0391 ± 0.0013 | 0.0088 ± 0.0004 | 0.0263 ± 0.0007 | 0.0441 ± 0.0017 | 0.0360 ± 0.0010 | 0.0591 ± 0.0073 | 1.00 |
+| drop-n_s | Omega0, sigma8, OmegaBaryon, HubbleParam | 0.0385 ± 0.0010 | 0.0088 ± 0.0004 | 0.0262 ± 0.0005 | 0.0434 ± 0.0013 | 0.0353 ± 0.0011 | 0.0633 ± 0.0000 | 1.09 |
+| drop-Omega0+OmegaBaryon | sigma8, HubbleParam, n_s | 0.0454 ± 0.0004 | 0.0069 ± 0.0002 | 0.0201 ± 0.0001 | 0.0527 ± 0.0005 | 0.0371 ± 0.0001 | 0.0759 ± 0.0000 | 0.06 |
+| only-Omega0 | Omega0 | 0.0440 ± 0.0002 | 0.0075 ± 0.0002 | 0.0206 ± 0.0008 | 0.0510 ± 0.0002 | 0.0362 ± 0.0004 | 0.0633 ± 0.0000 | 0.26 |
+| only-sigma8 | sigma8 | 0.0458 ± 0.0002 | 0.0070 ± 0.0002 | 0.0198 ± 0.0003 | 0.0533 ± 0.0002 | 0.0372 ± 0.0003 | 0.0675 ± 0.0073 | -0.00 |
+| only-OmegaBaryon | OmegaBaryon | 0.0462 ± 0.0005 | 0.0074 ± 0.0003 | 0.0202 ± 0.0010 | 0.0537 ± 0.0005 | 0.0376 ± 0.0007 | 0.0633 ± 0.0000 | -0.06 |
+| only-HubbleParam | HubbleParam | 0.0446 ± 0.0001 | 0.0074 ± 0.0003 | 0.0202 ± 0.0005 | 0.0518 ± 0.0001 | 0.0364 ± 0.0003 | 0.0633 ± 0.0000 | 0.17 |
+| only-n_s | n_s | 0.0454 ± 0.0001 | 0.0073 ± 0.0003 | 0.0200 ± 0.0008 | 0.0528 ± 0.0002 | 0.0370 ± 0.0003 | 0.0675 ± 0.0073 | 0.05 |
+| only-Omega0+OmegaBaryon | Omega0, OmegaBaryon | 0.0383 ± 0.0008 | 0.0090 ± 0.0003 | 0.0253 ± 0.0010 | 0.0433 ± 0.0008 | 0.0353 ± 0.0011 | 0.0633 ± 0.0000 | 1.12 |
+
+Permutation importance on the `all` models (ΔRMSE, mean ± sd over seeds; 20 perms each):
+
+| permuted | ΔRMSE |
+|---|---|
+| Omega0 | 0.1331 ± 0.0152 |
+| sigma8 | 0.0006 ± 0.0007 |
+| OmegaBaryon | 0.0695 ± 0.0094 |
+| HubbleParam | 0.0008 ± 0.0003 |
+| n_s | 0.0010 ± 0.0005 |
+| Omega0+OmegaBaryon | 0.1575 ± 0.0177 |
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/cosmo_ablation/ablate_cosmo_params_nofb.png

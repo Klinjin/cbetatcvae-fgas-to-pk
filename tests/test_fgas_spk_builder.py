@@ -216,3 +216,156 @@ def test_build_clamps_when_density_exceeds_halo_count(tmp_path):
     )
     np.testing.assert_allclose(ds.fgas[:, 0, :], masses.mean())
     np.testing.assert_allclose(ds.mean_halo_mass[:, 0], masses.mean())
+
+
+# --- eighth-generation compiled layout -------------------------------------
+
+def _write_compiled_eighth_gen(
+    data_dir: Path,
+    number_densities,
+    n_sims: int,
+    snapshot: int = 82,
+    stored_number_densities=None,
+    n_radii: int = 6,
+    box_size_mpch: float = 50.0,
+    vary_radii: bool = False,
+) -> np.ndarray:
+    """Write eighth-gen compiled files: suffix tag, per-sim ``radii_mpch``,
+    scalar ``n_halos`` / ``number_density``. Returns the written f_gas stack."""
+    stored = stored_number_densities or number_densities
+    radii = np.tile(np.linspace(0.1, 20.0, n_radii), (n_sims, 1))
+    if vary_radii:
+        radii[1] *= 1.01
+    rng = np.random.default_rng(1)
+    profs = []
+    for i, nd in enumerate(number_densities):
+        n = int(nd * box_size_mpch ** 3)
+        prof = rng.random((n_sims, n_radii))
+        profs.append(prof)
+        np.savez(
+            data_dir / (
+                "DeltaSigma_kSZ_over_DeltaSigma_total_profiles"
+                f"_snap{snapshot}_nd_{i}_n_{n}_eighth_gen.npz"
+            ),
+            prof=prof, prof_std=0.1 * prof, radii_mpch=radii,
+            radii_arcmin=3.0 * radii, unit="mpch",
+            number_density=stored[i], n_halos=n,
+        )
+    return np.stack(profs, axis=1)
+
+
+def test_compiled_loader_eighth_gen_layout(tmp_path):
+    nds = (1.0e-3, 4.0e-3)
+    written = _write_compiled_eighth_gen(tmp_path, nds, n_sims=3)
+    sup = tmp_path / "Ptot_Pdm_ratio_snap82.npz"
+    _write_suppression(sup, n_sims=3)
+    ds = m.build_fgas_spk_from_compiled(
+        tmp_path, sup, snapshot=82, number_densities=nds, name_extra="",
+        name_suffix="_eighth_gen", rank_key="stellar",
+    )
+    assert ds.fgas.shape == (3, 2, 6)
+    np.testing.assert_array_equal(ds.fgas, written)
+    np.testing.assert_allclose(ds.radii_mpch, np.linspace(0.1, 20.0, 6))
+    np.testing.assert_allclose(ds.number_densities, nds)
+    assert ds.rank_key == "stellar"
+
+
+def test_compiled_loader_eighth_gen_warns_on_stored_nd_mismatch(tmp_path):
+    # The eighth-gen producer stamps snap74 densities into the snap82 files.
+    nds = (1.0e-3, 4.0e-3)
+    _write_compiled_eighth_gen(
+        tmp_path, nds, n_sims=3, stored_number_densities=(1.0e-4, 2.8e-4)
+    )
+    sup = tmp_path / "Ptot_Pdm_ratio_snap82.npz"
+    _write_suppression(sup, n_sims=3)
+    with pytest.warns(UserWarning, match="stored number_density"):
+        ds = m.build_fgas_spk_from_compiled(
+            tmp_path, sup, snapshot=82, number_densities=nds, name_extra="",
+            name_suffix="_eighth_gen",
+        )
+    np.testing.assert_allclose(ds.number_densities, nds)
+
+
+def test_compiled_loader_eighth_gen_rejects_varying_radii(tmp_path):
+    nds = (1.0e-3,)
+    _write_compiled_eighth_gen(tmp_path, nds, n_sims=3, vary_radii=True)
+    sup = tmp_path / "Ptot_Pdm_ratio_snap82.npz"
+    _write_suppression(sup, n_sims=3)
+    with pytest.raises(ValueError, match="varies between simulations"):
+        m.build_fgas_spk_from_compiled(
+            tmp_path, sup, snapshot=82, number_densities=nds, name_extra="",
+            name_suffix="_eighth_gen",
+        )
+
+
+def test_compiled_loader_arcmin_design_stores_median_grid(tmp_path):
+    # arcmin design: per-sim comoving radii, '_arcmin' infix, unit='arcmin'.
+    n_sims, n_radii, n = 3, 4, 50
+    radii = np.array([[1.0, 2.0, 3.0, 20.0], [1.2, 2.4, 3.6, 20.0],
+                      [0.8, 1.6, 2.4, 20.0]])
+    prof = np.arange(n_sims * n_radii, dtype=float).reshape(n_sims, n_radii)
+    np.savez(
+        tmp_path / ("DeltaSigma_kSZ_over_DeltaSigma_total_profiles_arcmin"
+                    f"_snap74_nd_0_n_{n}_eighth_gen.npz"),
+        prof=prof, prof_std=0.1 * prof, radii_mpch=radii,
+        radii_arcmin=3.0 * radii, unit="arcmin", number_density=4.0e-4,
+        n_halos=n,
+    )
+    sup = tmp_path / "Ptot_Pdm_ratio_snap74.npz"
+    _write_suppression(sup, n_sims=n_sims)
+    kw = dict(snapshot=74, number_densities=(4.0e-4,), name_extra="",
+              name_suffix="_eighth_gen")
+    ds = m.build_fgas_spk_from_compiled(tmp_path, sup, radial_design="arcmin", **kw)
+    np.testing.assert_array_equal(ds.fgas[:, 0, :], prof)
+    np.testing.assert_allclose(ds.radii_mpch, [1.0, 2.0, 3.0, 20.0])
+    # The same file under the default 'mpch' design: wrong filename -> missing.
+    with pytest.raises(FileNotFoundError):
+        m.build_fgas_spk_from_compiled(tmp_path, sup, **kw)
+
+
+def test_compiled_loader_rejects_unit_mismatch(tmp_path):
+    nds = (1.0e-3,)
+    _write_compiled_eighth_gen(tmp_path, nds, n_sims=3)  # stored unit='mpch'
+    path = next(tmp_path.glob("*_nd_0_*"))
+    path.rename(path.with_name(path.name.replace("profiles_snap", "profiles_arcmin_snap")))
+    sup = tmp_path / "Ptot_Pdm_ratio_snap82.npz"
+    _write_suppression(sup, n_sims=3)
+    with pytest.raises(ValueError, match="unit"):
+        m.build_fgas_spk_from_compiled(
+            tmp_path, sup, snapshot=82, number_densities=nds, name_extra="",
+            name_suffix="_eighth_gen", radial_design="arcmin",
+        )
+
+
+def test_compiled_loader_arcmin_angular_cut(tmp_path):
+    # Inner bins fixed in angle; the outer bin varies per sim and is cut.
+    n = 50
+    # The inner bins, including one exactly at the 6.0 limit, are angle-fixed.
+    radii_arcmin = np.array([[1.0, 3.0, 6.0, 7.7], [1.0, 3.0, 6.0, 7.9],
+                             [1.0, 3.0, 6.0, 7.6]])
+    radii_mpch = np.array([[0.34, 1.0, 1.7, 2.6], [0.36, 1.1, 1.8, 2.7],
+                           [0.38, 1.2, 1.9, 2.8]])
+    prof = np.arange(12, dtype=float).reshape(3, 4)
+    np.savez(
+        tmp_path / ("DeltaSigma_kSZ_over_DeltaSigma_total_profiles_arcmin"
+                    f"_snap74_nd_0_n_{n}_eighth_gen.npz"),
+        prof=prof, prof_std=0.1 * prof, radii_mpch=radii_mpch,
+        radii_arcmin=radii_arcmin, unit="arcmin", number_density=4.0e-4,
+        n_halos=n,
+    )
+    sup = tmp_path / "Ptot_Pdm_ratio_snap74.npz"
+    _write_suppression(sup, n_sims=3)
+    kw = dict(snapshot=74, number_densities=(4.0e-4,), name_extra="",
+              name_suffix="_eighth_gen", radial_design="arcmin")
+    ds = m.build_fgas_spk_from_compiled(tmp_path, sup, max_radius_arcmin=6.0, **kw)
+    np.testing.assert_array_equal(ds.fgas[:, 0, :], prof[:, :3])
+    np.testing.assert_allclose(ds.fgas_std[:, 0, :], 0.1 * prof[:, :3])
+    np.testing.assert_allclose(ds.radii_mpch, [0.36, 1.1, 1.8])
+    # A cut that would keep a per-sim-varying bin is refused.
+    with pytest.raises(ValueError, match="identical angular radii"):
+        m.build_fgas_spk_from_compiled(tmp_path, sup, max_radius_arcmin=8.0, **kw)
+    with pytest.raises(ValueError, match="only to radial_design"):
+        m.build_fgas_spk_from_compiled(
+            tmp_path, sup, snapshot=74, number_densities=(4.0e-4,),
+            name_extra="", name_suffix="_eighth_gen", max_radius_arcmin=6.0,
+        )

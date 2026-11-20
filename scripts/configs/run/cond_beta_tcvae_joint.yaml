@@ -1,0 +1,49 @@
+# RunConfig for the JOINT conditional-prior beta-TCVAE (scripts/joint_cond_beta_tcvae.py;
+# fgas_spk.models.cond_beta_tcvae). Identical to beta_tcvae_joint.yaml in every
+# shared setting (data, widths, epochs, optimiser, MSS minibatch M = 128, warm-up,
+# grouped holdout, outer split), so the two differ ONLY in the prior:
+#   beta_tcvae       p(z) = N(0, I)                      (Lin et al.)
+#   cond_beta_tcvae  p(z | x, y_hat, ctx), y_hat = f_b(x, ctx)  (Sohn et al. + recurrent)
+# The MI / TC / dwKL split is taken in prior-whitened coordinates
+# u = (z - mu_p) / sigma_p (exact; see the module docstring).
+#
+# alpha = beta = gamma = lambda = 1: the decomposed objective equals the plain
+# conditional ELBO (+ the baseline's regression NLL) -- a baseline, not a tuned setting.
+#
+model: cond_beta_tcvae             # registry name; needs `import fgas_spk.models.cond_beta_tcvae`
+model_params:
+  latent_dim: 2               # Lin et al.'s 2-D latent
+  hidden: 128                 # as the joint cVAE
+  n_layers: 2                 # as the joint cVAE
+  epochs: 200                 # as the joint cVAE
+  lr: 5.0e-4                  # as the joint cVAE
+  weight_decay: 1.0e-4        # >0 -> AdamW, as the joint cVAE
+  dropout: 0.0                # as the joint cVAE
+  batch_size: 128             # as the joint cVAE (MSS minibatch M = 128)
+  kl_lambda: 1.0              # overall KL scale lambda
+  alpha_mi: 1.0               # index-code mutual information weight
+  beta_tc: 1.0                # total-correlation weight
+  gamma_dwkl: 1.0             # dimension-wise KL weight
+  anneal_epochs: null         # null -> epochs // 4 (= 50); linear warm-up, as the joint cVAE
+  anneal_cycle_epochs: null   # no cyclical schedule (single warm-up, as the joint cVAE)
+  recurrent: true             # baseline y_hat = f_b(x, ctx) fed to the prior (Sohn et al. recurrent connection)
+  baseline_detach: true       # stop-gradient on y_hat into the prior: y_hat stays an estimate of E[y|x]
+  baseline_weight: 1.0        # weight of the baseline's sigma-VAE NLL (joint likelihood)
+  use_profile: true           # f_gas profile feeds encoder and decoder, as the joint cVAE
+  val_frac: 0.1               # internal holdout for best-epoch restore
+  val_grouped: true           # holdout by simulation (10 rows/sim share 2 targets)
+  obs_calibrate_on_val: false # ship the training-set sigma-VAE variance
+
+seed: 0
+
+# Identical to beta_tcvae_joint.yaml / cvae_noise_joint.yaml: same test simulations.
+split:
+  train_frac: 0.7
+  val_frac: 0.1
+  test_frac: 0.2
+  seed: 10
+
+evaluation:
+  suppressed_thresholds: [0.95, 0.9, 0.8]
+
+write_root: null

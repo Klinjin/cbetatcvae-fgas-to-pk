@@ -1,0 +1,35 @@
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap82/20261002T200709Z__ae415e59__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap82/20261002T200719Z__9efbcbb5__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap82/20261002T200728Z__76c82132__2e53c8d
+{
+  "run": "20261002T200728Z__76c82132__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.06331017806112398,
+    "rmse_median_over_k": 0.042553578286569846,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.05516569130875207,
+    "rmse_median_over_k": 0.052714051081491776,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.05745437885294134,
+    "rmse_median_over_k": 0.045713797588837125,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.16455696202531644
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-02/arcmin9_cosmo_kmax10_snap82/20261002T200728Z__76c82132__2e53c8d__rmse_vs_k_pub.png
+moved figures for ae415e59 -> figures/2026-10/10-02/arcmin9_cosmo_kmax10_snap82
+moved figures for 9efbcbb5 -> figures/2026-10/10-02/arcmin9_cosmo_kmax10_snap82
+moved figures for 76c82132 -> figures/2026-10/10-02/arcmin9_cosmo_kmax10_snap82

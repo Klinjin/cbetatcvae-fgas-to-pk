@@ -42,6 +42,7 @@ Example config (YAML)::
     # CAMELS params in X_params):
     number_density_indices: [0, 1, 2, 3, 4]   # null = all five
     radial_range_mpch: [0.1, 2.0]             # null = full radial range
+    radial_range_arcmin: null                 # arcmin-design datasets only: 6 = bins <= 6' (9 bins); null = all
     include_nd_feature: true                  # number density -> X_cond
     include_mean_halo_mass: false             # mean M_500c -> X_cond
     include_camels_params: true               # CAMELS params -> X_params (on by default)
@@ -114,10 +115,27 @@ class DataConfig:
         radial_range_mpch (tuple[float, float], optional): Inclusive
             ``(r_min, r_max)`` crop of the profile radii in comoving Mpc/h. None
             keeps the full radial range.
+        radial_range_arcmin (float | tuple[float, float], optional): Angular
+            crop for **arcmin-design** datasets, in arcmin. A single number
+            ``r`` keeps the bins with ``r_arcmin <= r`` (e.g. ``6`` keeps the 9
+            angle-fixed bins 1 -- 6 arcmin of the eighth-gen 18-bin design); a
+            pair ``(lo, hi)`` keeps ``lo <= r_arcmin <= hi``. Both are inclusive.
+            A bin is kept only if it lies inside the range in **every**
+            simulation, using the per-bin angular min / max stamped in the
+            dataset's ``radial_grid``; a bin inside for some simulations and
+            outside for others raises rather than selecting different bins per
+            simulation. None keeps every bin. Mutually exclusive with
+            ``radial_range_mpch``; raises on datasets without an arcmin grid.
         include_nd_feature (bool): Append the number density as a conditioning
             feature column. Defaults to True.
         include_mean_halo_mass (bool): Append the stack's mean M_500c [M_sun/h]
             as a feature column. Defaults to False.
+        include_fgas_std (bool): Load the dataset's ``fgas_std`` -- the
+            halo-to-halo standard deviation of f_gas within each (sim, nd) stack,
+            propagated in quadrature from the ionised and total Delta Sigma
+            stacks -- into :attr:`TrainingData.X_std`, row- and column-aligned
+            with ``X`` (same radial crop). It is not concatenated into ``X``;
+            the caller decides how it enters a model. Defaults to False.
         include_camels_params (bool): Load the simulation's CAMELS parameters
             into the separate :attr:`TrainingData.X_params` modality (not
             concatenated into ``X``). Defaults to True. With it enabled, a
@@ -160,8 +178,10 @@ class DataConfig:
     # --- inputs / features ---
     number_density_indices: list[int] | None = None
     radial_range_mpch: tuple[float, float] | None = None
+    radial_range_arcmin: float | tuple[float, float] | None = None
     include_nd_feature: bool = True
     include_mean_halo_mass: bool = False
+    include_fgas_std: bool = False
     include_camels_params: bool = True
     camels_param_indices: list[int] | None = None
     camels_param_names: list[str] | None = None
@@ -179,6 +199,25 @@ class DataConfig:
             self.radial_range_mpch = tuple(self.radial_range_mpch)  # type: ignore[assignment]
         if self.k_range is not None:
             self.k_range = tuple(self.k_range)  # type: ignore[assignment]
+        if self.radial_range_arcmin is not None:
+            # A scalar is an upper bound (lower bound 0); store as a clean tuple.
+            rng = self.radial_range_arcmin
+            if isinstance(rng, (int, float)) and not isinstance(rng, bool):
+                rng = (0.0, float(rng))
+            rng = tuple(float(v) for v in rng)  # type: ignore[union-attr]
+            if len(rng) != 2 or not (0.0 <= rng[0] <= rng[1]):
+                raise ValueError(
+                    "radial_range_arcmin must be a number r_max or a pair "
+                    f"(r_min, r_max) with 0 <= r_min <= r_max, got "
+                    f"{self.radial_range_arcmin!r}."
+                )
+            self.radial_range_arcmin = rng  # type: ignore[assignment]
+            if self.radial_range_mpch is not None:
+                raise ValueError(
+                    "radial_range_mpch and radial_range_arcmin are both set; give "
+                    "at most one radial crop (arcmin for arcmin-design datasets, "
+                    "Mpc/h otherwise)."
+                )
         if self.target_mode not in _TARGET_MODES:
             raise ValueError(
                 f"target_mode must be one of {_TARGET_MODES}, got "
@@ -328,6 +367,9 @@ class TrainingData:
         source_path (str): The resolved ``.npz`` the data was read from.
         meta (dict): The dataset's embedded ``__meta__`` provenance.
         config (DataConfig): The config used to build this object.
+        X_std (np.ndarray, optional): Halo-to-halo standard deviation of the
+            profile in ``X`` (the dataset's ``fgas_std``), same shape and
+            column order as ``X``. None unless ``include_fgas_std`` is set.
     """
 
     X: np.ndarray
@@ -342,6 +384,7 @@ class TrainingData:
     param_names: list[str] | None = None
     meta: dict = field(default_factory=dict)
     config: DataConfig | None = None
+    X_std: np.ndarray | None = None
 
 
 def _read_meta(npz_path: Path) -> dict:
@@ -425,6 +468,66 @@ def _radial_mask(dataset: FgasSpkDataset, rng: tuple[float, float] | None) -> np
     return mask
 
 
+def _arcmin_radial_mask(
+    dataset: FgasSpkDataset, radial_grid: dict, rng: tuple[float, float]
+) -> np.ndarray:
+    """Select arcmin-design bins lying inside the inclusive angular range in every sim.
+
+    Args:
+        dataset (FgasSpkDataset): The loaded dataset (for the bin count).
+        radial_grid (dict): The dataset's ``__meta__['radial_grid']`` stamp. Per-bin
+            angular extremes come from ``radii_arcmin_min`` / ``radii_arcmin_max``
+            when present (bins that vary in angle between simulations), else from
+            ``radii_arcmin`` (an angle-fixed grid, identical in every simulation).
+        rng (tuple[float, float]): Inclusive ``(r_min, r_max)`` in arcmin.
+
+    Returns:
+        np.ndarray: Boolean mask over the radial bins, shape (n_radii,).
+
+    Raises:
+        ValueError: If the dataset has no arcmin radial grid, the stamped grid does
+            not match the bin count, a bin lies inside the range for some
+            simulations but outside for others, or no bin is selected.
+    """
+    if radial_grid.get("design") != "arcmin":
+        raise ValueError(
+            f"radial_range_arcmin={rng} needs an arcmin-design dataset (a "
+            "'radial_grid' stamp with design 'arcmin'); this dataset has "
+            f"design {radial_grid.get('design')!r}. Use radial_range_mpch instead."
+        )
+    if "radii_arcmin_min" in radial_grid:
+        a_min = np.asarray(radial_grid["radii_arcmin_min"], dtype=float)
+        a_max = np.asarray(radial_grid["radii_arcmin_max"], dtype=float)
+    else:
+        a_min = a_max = np.asarray(radial_grid["radii_arcmin"], dtype=float)
+    n_radii = np.asarray(dataset.radii_mpch).shape[0]
+    if a_min.shape != (n_radii,) or a_max.shape != (n_radii,):
+        raise ValueError(
+            f"radial_grid arcmin radii have {a_min.shape[0]} bins but the dataset "
+            f"has {n_radii}; the stamp does not describe this profile."
+        )
+    lo = float(rng[0]) * (1.0 - 1e-9)   # relative tolerance: keep a bin stored at a limit
+    hi = float(rng[1]) * (1.0 + 1e-9)
+    inside_all = (a_min >= lo) & (a_max <= hi)
+    inside_any = (a_max >= lo) & (a_min <= hi)
+    straddle = inside_any & ~inside_all
+    if straddle.any():
+        j = np.nonzero(straddle)[0]
+        raise ValueError(
+            f"radial_range_arcmin={rng} cuts through bins {j.tolist()}, whose "
+            "angular radii span "
+            + ", ".join(f"[{a_min[i]:.3g}, {a_max[i]:.3g}]" for i in j)
+            + " arcmin across simulations: they would be kept for some sims and "
+            "dropped for others. Choose a limit outside those spans."
+        )
+    if not inside_all.any():
+        raise ValueError(
+            f"radial_range_arcmin={rng} selects no radii (available "
+            f"{a_min.min():.4g}..{a_max.max():.4g} arcmin)."
+        )
+    return inside_all
+
+
 def load_training_data(config: DataConfig) -> TrainingData:
     """Build model-ready arrays from a saved dataset per ``config``.
 
@@ -456,9 +559,25 @@ def load_training_data(config: DataConfig) -> TrainingData:
     dataset = load_dataset(npz_path)
     meta = _read_meta(npz_path)
 
+    # A dataset whose radial bins sit at different comoving radii in different
+    # simulations (e.g. the eighth-gen arcmin design) stores only a nominal
+    # radii_mpch; cropping by it would select different physical radii per sim.
+    radial_grid = meta.get("radial_grid") or {}
+    if radial_grid.get("fixed_across_sims") is False and config.radial_range_mpch is not None:
+        raise ValueError(
+            f"radial_range_mpch={config.radial_range_mpch} cannot be applied: this "
+            f"dataset's radial grid ({radial_grid.get('design', 'unknown')} design) "
+            "is not fixed across simulations, and its radii_mpch is only a "
+            "nominal per-bin median. Use radial_range_mpch: null (and "
+            "radial_range_arcmin to crop by angle)."
+        )
+
     rows = _select_sim_rows(dataset, config.sim_ids)          # (S,)
     nd_idx = _select_nd_indices(dataset, config.number_density_indices)  # (M,)
-    rmask = _radial_mask(dataset, config.radial_range_mpch)   # (n_radii,)
+    if config.radial_range_arcmin is not None:
+        rmask = _arcmin_radial_mask(dataset, radial_grid, config.radial_range_arcmin)
+    else:
+        rmask = _radial_mask(dataset, config.radial_range_mpch)   # (n_radii,)
     r_pos = np.where(rmask)[0]
 
     n_sims_sel, n_nd_sel = rows.shape[0], nd_idx.shape[0]
@@ -467,6 +586,11 @@ def load_training_data(config: DataConfig) -> TrainingData:
     # Profile block: (S, M, R_sel) -> (S*M, R_sel), simulation-major.
     fgas_block = dataset.fgas[np.ix_(rows, nd_idx, r_pos)]
     x_profiles = fgas_block.reshape(n_rows, r_pos.shape[0])
+    # The stack's halo-to-halo scatter, flattened identically so it stays aligned.
+    x_std = (
+        dataset.fgas_std[np.ix_(rows, nd_idx, r_pos)].reshape(n_rows, r_pos.shape[0])
+        if config.include_fgas_std else None
+    )
 
     # Per-row bookkeeping (aligned with the sim-major / nd-minor flattening).
     nd_values = np.asarray(dataset.number_densities)[nd_idx]      # (M,)
@@ -545,6 +669,7 @@ def load_training_data(config: DataConfig) -> TrainingData:
         param_names=param_names,
         meta=meta,
         config=config,
+        X_std=x_std,
     )
 
 
@@ -563,6 +688,7 @@ def _summarize(td: TrainingData) -> str:
     lines = [
         f"resolved path : {td.source_path}",
         f"X shape       : {td.X.shape}  (n_examples, n_radii) [profile]",
+        f"X_std shape   : {td.X_std.shape if td.X_std is not None else 'none'}  (fgas_std)",
         f"X_cond shape  : {cond_shape}  (nd, mean_halo_mass)",
         f"X_params shape: {params_shape}  (CAMELS params)",
         f"X_params cols : {params_cols}",

@@ -75,6 +75,54 @@ import numpy as np
 _LOG_2PI = math.log(2.0 * math.pi)
 
 
+def _holdout_rows(
+    n_total: int, val_frac: float, seed: int, groups: np.ndarray | None = None
+) -> tuple[np.ndarray, np.ndarray, bool]:
+    """Seeded internal holdout for best-epoch restore (the cvae pattern).
+
+    Without ``groups`` the first ``ceil(val_frac * n)`` rows of a seeded
+    shuffle are held out. With ``groups`` (one label per row, e.g.
+    ``sim_index``) whole groups are held out instead -- ``ceil(val_frac *
+    n_groups)`` of them, drawn by a seeded permutation of the unique labels,
+    exactly as ``Cvae(val_grouped=True)`` -- so rows that share a target (one
+    simulation stacked at several number densities) never straddle the split.
+
+    Args:
+        n_total (int): Number of rows.
+        val_frac (float): Holdout fraction; 0 disables the holdout.
+        seed (int): Shuffle seed.
+        groups (np.ndarray | None): Per-row group labels, shape (n_total,).
+            Defaults to None (row-level holdout).
+
+    Returns:
+        tuple[np.ndarray, np.ndarray, bool]: ``(train_rows, val_rows,
+        use_val)``.
+
+    Raises:
+        ValueError: If ``groups`` has the wrong length, or a grouped holdout
+            leaves no training or validation group.
+    """
+    n_val = math.ceil(val_frac * n_total) if val_frac > 0 else 0
+    if not 0 < n_val < n_total:
+        return np.arange(n_total), np.empty(0, dtype=int), False
+    if groups is None:
+        shuffled = np.random.default_rng(seed).permutation(n_total)
+        return shuffled[n_val:], shuffled[:n_val], True
+    groups = np.asarray(groups)
+    if groups.shape != (n_total,):
+        raise ValueError(f"groups must have shape ({n_total},); got {groups.shape}.")
+    labels = np.unique(groups)
+    n_val_groups = math.ceil(val_frac * len(labels))
+    if not 0 < n_val_groups < len(labels):
+        raise ValueError(
+            f"grouped holdout with val_frac={val_frac} leaves no training or "
+            f"validation groups ({len(labels)} groups)."
+        )
+    val_labels = np.random.default_rng(seed).permutation(labels)[:n_val_groups]
+    is_val = np.isin(groups, val_labels)
+    return np.where(~is_val)[0], np.where(is_val)[0], True
+
+
 class GaussianVAE:
     """Conditional Gaussian VAE for one modality (SP(k) or f_gas(R)).
 
@@ -164,7 +212,12 @@ class GaussianVAE:
 
     # --- public API --------------------------------------------------------
 
-    def fit(self, data: np.ndarray, context: np.ndarray | None = None) -> None:
+    def fit(
+        self,
+        data: np.ndarray,
+        context: np.ndarray | None = None,
+        groups: np.ndarray | None = None,
+    ) -> None:
         """Fit the VAE on ``data`` by maximising the annealed Gaussian ELBO.
 
         Args:
@@ -174,6 +227,9 @@ class GaussianVAE:
                 (n_examples, n_context), fed to both encoder and decoder; a
                 context passed here is then required by every later call.
                 Defaults to None.
+            groups (np.ndarray | None): Per-row group labels (``sim_index``)
+                for a grouped internal holdout (see :func:`_holdout_rows`).
+                Defaults to None (row-level holdout).
         """
         import torch
 
@@ -183,14 +239,7 @@ class GaussianVAE:
 
         # Seeded internal holdout for best-epoch restore (cvae pattern).
         n_total = v.shape[0]
-        n_val = math.ceil(self.val_frac * n_total) if self.val_frac > 0 else 0
-        use_val = 0 < n_val < n_total
-        if use_val:
-            shuffled = np.random.default_rng(self.seed).permutation(n_total)
-            val_rows, train_rows = shuffled[:n_val], shuffled[n_val:]
-        else:
-            train_rows = np.arange(n_total)
-            val_rows = np.empty(0, dtype=int)
+        train_rows, val_rows, use_val = _holdout_rows(n_total, self.val_frac, self.seed, groups)
 
         # Standardisation fitted on the training rows only.
         self._v_mean, self._v_std = self._fit_norm(v[train_rows])
@@ -644,12 +693,15 @@ class _LatentMapBase:
 
     # -- shared fit ----------------------------------------------------------
 
-    def fit(self, z1: np.ndarray, z2: np.ndarray) -> None:
+    def fit(self, z1: np.ndarray, z2: np.ndarray, groups: np.ndarray | None = None) -> None:
         """Fit the map on ``(z1, z2)`` posterior-mean pairs.
 
         Args:
             z1 (np.ndarray): Inputs, shape (n_examples, d1).
             z2 (np.ndarray): Targets, shape (n_examples, d2).
+            groups (np.ndarray | None): Per-row group labels (``sim_index``)
+                for a grouped internal holdout (see :func:`_holdout_rows`).
+                Defaults to None (row-level holdout).
         """
         import torch
 
@@ -657,13 +709,7 @@ class _LatentMapBase:
         z2 = np.asarray(z2, dtype=np.float64)
 
         n_total = z1.shape[0]
-        n_val = math.ceil(self.val_frac * n_total) if self.val_frac > 0 else 0
-        use_val = 0 < n_val < n_total
-        if use_val:
-            shuffled = np.random.default_rng(self.seed).permutation(n_total)
-            val_rows, train_rows = shuffled[:n_val], shuffled[n_val:]
-        else:
-            train_rows = np.arange(n_total)
+        train_rows, val_rows, use_val = _holdout_rows(n_total, self.val_frac, self.seed, groups)
 
         self._in_mean, self._in_std = GaussianVAE._fit_norm(z1[train_rows])
         self._out_mean, self._out_std = GaussianVAE._fit_norm(z2[train_rows])
@@ -988,12 +1034,14 @@ class LatentMapRidge:
         self.seed = seed
         self._model = None
 
-    def fit(self, z1: np.ndarray, z2: np.ndarray) -> None:
+    def fit(self, z1: np.ndarray, z2: np.ndarray, groups: np.ndarray | None = None) -> None:
         """Fit RidgeCV on the raw code pairs.
 
         Args:
             z1 (np.ndarray): Inputs, shape (n_examples, d1).
             z2 (np.ndarray): Targets, shape (n_examples, d2).
+            groups (np.ndarray | None): Ignored (no internal holdout; interface
+                compatibility with the torch rungs).
         """
         from sklearn.linear_model import RidgeCV
 
@@ -1044,12 +1092,18 @@ class PcaCodec:
         self._pca = None
         self._resid_std: np.ndarray | None = None
 
-    def fit(self, v: np.ndarray, context: np.ndarray | None = None) -> None:
+    def fit(
+        self,
+        v: np.ndarray,
+        context: np.ndarray | None = None,
+        groups: np.ndarray | None = None,
+    ) -> None:
         """Fit the PCA codec and its truncation-residual scale.
 
         Args:
             v (np.ndarray): Modality values, shape (n_examples, n_bins).
             context (np.ndarray | None): Ignored (interface compatibility).
+            groups (np.ndarray | None): Ignored (no internal holdout).
         """
         from sklearn.decomposition import PCA
 

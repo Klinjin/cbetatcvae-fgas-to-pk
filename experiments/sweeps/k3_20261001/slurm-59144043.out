@@ -1,0 +1,902 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.8.1/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.1.0/Miniforge3-25.11.0-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.8.1/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+stage1 default [0.0, 3.1] obj(k3 abs RMSE)=0.0719 {74: 0.018, 82: 0.0124}
+stage1 default [0.0, 5.0] obj(k3 abs RMSE)=0.1007 {74: 0.0174, 82: 0.0122}
+stage1 default [0.0, 10.0] obj(k3 abs RMSE)=0.0718 {74: 0.0176, 82: 0.0122}
+stage1 default [0.0, 20.0] obj(k3 abs RMSE)=0.0673 {74: 0.0182, 82: 0.0129}
+stage1 default [0.0, None] obj(k3 abs RMSE)=0.0656 {74: 0.0142, 82: 0.0132}
+stage1 default [1.0, 3.1] obj(k3 abs RMSE)=0.0582 {74: 0.0183, 82: 0.013}
+stage1 default [1.0, 5.0] obj(k3 abs RMSE)=0.0737 {74: 0.0171, 82: 0.0122}
+stage1 default [1.0, 10.0] obj(k3 abs RMSE)=0.0722 {74: 0.0134, 82: 0.0117}
+stage1 default [1.0, 20.0] obj(k3 abs RMSE)=0.0872 {74: 0.0194, 82: 0.0131}
+stage1 default [1.0, None] obj(k3 abs RMSE)=0.0645 {74: 0.0181, 82: 0.0139}
+stage1 default [2.0, 3.1] obj(k3 abs RMSE)=0.0839 {74: 0.0142, 82: 0.013}
+stage1 default [2.0, 5.0] obj(k3 abs RMSE)=0.0600 {74: 0.0174, 82: 0.0118}
+stage1 default [2.0, 10.0] obj(k3 abs RMSE)=0.0852 {74: 0.017, 82: 0.0115}
+stage1 default [2.0, 20.0] obj(k3 abs RMSE)=0.1019 {74: 0.0133, 82: 0.0134}
+stage1 default [2.0, None] obj(k3 abs RMSE)=0.0781 {74: 0.0139, 82: 0.0146}
+stage1 default single obj(k3 abs RMSE)=0.1196 {74: 0.0197, 82: 0.015}
+STAGE1 best window [1.0, 3.1]
+stage2 default [1.0, 3.1] obj(k3 abs RMSE)=0.0582 {74: 0.0183, 82: 0.013}
+stage2 rand00 [1.0, 3.1] obj(k3 abs RMSE)=0.1104 {74: 0.0132, 82: 0.0126}
+stage2 rand01 [1.0, 3.1] obj(k3 abs RMSE)=0.0692 {74: 0.0122, 82: 0.0113}
+stage2 rand02 [1.0, 3.1] obj(k3 abs RMSE)=0.0616 {74: 0.0134, 82: 0.0135}
+stage2 rand03 [1.0, 3.1] obj(k3 abs RMSE)=0.0584 {74: 0.0184, 82: 0.0121}
+stage2 rand04 [1.0, 3.1] obj(k3 abs RMSE)=0.0872 {74: 0.0133, 82: 0.0118}
+stage2 rand05 [1.0, 3.1] obj(k3 abs RMSE)=0.1310 {74: 0.0138, 82: 0.0121}
+stage2 rand06 [1.0, 3.1] obj(k3 abs RMSE)=0.0962 {74: 0.0133, 82: 0.0125}
+stage2 rand07 [1.0, 3.1] obj(k3 abs RMSE)=0.0927 {74: 0.0139, 82: 0.012}
+stage2 rand08 [1.0, 3.1] obj(k3 abs RMSE)=0.0641 {74: 0.0153, 82: 0.0171}
+stage2 rand09 [1.0, 3.1] obj(k3 abs RMSE)=0.0844 {74: 0.013, 82: 0.0118}
+stage2 rand10 [1.0, 3.1] obj(k3 abs RMSE)=0.0818 {74: 0.013, 82: 0.0114}
+stage2 rand11 [1.0, 3.1] obj(k3 abs RMSE)=0.1131 {74: 0.0151, 82: 0.0115}
+stage2 rand12 [1.0, 3.1] obj(k3 abs RMSE)=0.0910 {74: 0.0133, 82: 0.012}
+stage2 rand13 [1.0, 3.1] obj(k3 abs RMSE)=0.0599 {74: 0.018, 82: 0.0125}
+stage2 rand14 [1.0, 3.1] obj(k3 abs RMSE)=0.1038 {74: 0.0136, 82: 0.0117}
+stage2 rand15 [1.0, 3.1] obj(k3 abs RMSE)=0.0557 {74: 0.0138, 82: 0.0122}
+stage2 rand16 [1.0, 3.1] obj(k3 abs RMSE)=0.1259 {74: 0.0195, 82: 0.0123}
+stage2 rand17 [1.0, 3.1] obj(k3 abs RMSE)=0.0572 {74: 0.013, 82: 0.0117}
+stage2 rand18 [1.0, 3.1] obj(k3 abs RMSE)=0.1011 {74: 0.0129, 82: 0.0121}
+stage2 rand19 [1.0, 3.1] obj(k3 abs RMSE)=0.0574 {74: 0.0132, 82: 0.0122}
+stage2 rand20 [1.0, 3.1] obj(k3 abs RMSE)=0.1027 {74: 0.0144, 82: 0.0118}
+stage2 rand21 [1.0, 3.1] obj(k3 abs RMSE)=0.0562 {74: 0.0125, 82: 0.0123}
+stage2 rand22 [1.0, 3.1] obj(k3 abs RMSE)=0.0993 {74: 0.0135, 82: 0.0115}
+stage2 rand23 [1.0, 3.1] obj(k3 abs RMSE)=0.0792 {74: 0.0125, 82: 0.0126}
+stage2 rand24 [1.0, 3.1] obj(k3 abs RMSE)=0.1175 {74: 0.013, 82: 0.0121}
+stage2 rand25 [1.0, 3.1] obj(k3 abs RMSE)=0.0634 {74: 0.0135, 82: 0.0113}
+stage2 rand26 [1.0, 3.1] obj(k3 abs RMSE)=0.0969 {74: 0.014, 82: 0.0116}
+stage2 rand27 [1.0, 3.1] obj(k3 abs RMSE)=0.0895 {74: 0.0192, 82: 0.0126}
+stage2 rand28 [1.0, 3.1] obj(k3 abs RMSE)=0.1274 {74: 0.0134, 82: 0.0116}
+stage2 rand29 [1.0, 3.1] obj(k3 abs RMSE)=0.0801 {74: 0.0124, 82: 0.0116}
+stage2 rand30 [1.0, 3.1] obj(k3 abs RMSE)=0.0684 {74: 0.0127, 82: 0.0115}
+stage2 rand31 [1.0, 3.1] obj(k3 abs RMSE)=0.0933 {74: 0.0137, 82: 0.0125}
+stage2 rand32 [1.0, 3.1] obj(k3 abs RMSE)=0.0633 {74: 0.0136, 82: 0.0142}
+stage2 rand33 [1.0, 3.1] obj(k3 abs RMSE)=0.0677 {74: 0.0134, 82: 0.0118}
+stage2 rand34 [1.0, 3.1] obj(k3 abs RMSE)=0.1048 {74: 0.0143, 82: 0.0118}
+stage2 rand35 [1.0, 3.1] obj(k3 abs RMSE)=0.1040 {74: 0.014, 82: 0.0113}
+stage2 rand36 [1.0, 3.1] obj(k3 abs RMSE)=0.1018 {74: 0.0144, 82: 0.0134}
+stage2 rand37 [1.0, 3.1] obj(k3 abs RMSE)=0.0627 {74: 0.0142, 82: 0.0151}
+stage2 rand38 [1.0, 3.1] obj(k3 abs RMSE)=0.1105 {74: 0.0134, 82: 0.0121}
+stage2 rand39 [1.0, 3.1] obj(k3 abs RMSE)=0.0547 {74: 0.0131, 82: 0.0121}
+stage2 rand40 [1.0, 3.1] obj(k3 abs RMSE)=0.0575 {74: 0.0131, 82: 0.012}
+stage2 rand41 [1.0, 3.1] obj(k3 abs RMSE)=0.1138 {74: 0.0151, 82: 0.0118}
+stage2 rand42 [1.0, 3.1] obj(k3 abs RMSE)=0.0613 {74: 0.0138, 82: 0.0116}
+stage2 rand43 [1.0, 3.1] obj(k3 abs RMSE)=0.1221 {74: 0.014, 82: 0.0117}
+stage2 rand44 [1.0, 3.1] obj(k3 abs RMSE)=0.1071 {74: 0.013, 82: 0.0116}
+stage2 rand45 [1.0, 3.1] obj(k3 abs RMSE)=0.0573 {74: 0.0141, 82: 0.0127}
+stage2 rand46 [1.0, 3.1] obj(k3 abs RMSE)=0.1246 {74: 0.0138, 82: 0.012}
+stage2 rand47 [1.0, 3.1] obj(k3 abs RMSE)=0.0926 {74: 0.0132, 82: 0.011}
+stage3 rand39 [1.0, 3.1] obj(k3 abs RMSE)=0.0668 {74: 0.0117, 82: 0.0116}
+stage3 rand15 [1.0, 3.1] obj(k3 abs RMSE)=0.0748 {74: 0.013, 82: 0.0122}
+stage3 rand21 [1.0, 3.1] obj(k3 abs RMSE)=0.0637 {74: 0.0116, 82: 0.0114}
+stage3 rand17 [1.0, 3.1] obj(k3 abs RMSE)=0.0851 {74: 0.0122, 82: 0.0115}
+stage3 rand45 [1.0, 3.1] obj(k3 abs RMSE)=0.0782 {74: 0.0124, 82: 0.0124}
+stage3 rand19 [1.0, 3.1] obj(k3 abs RMSE)=0.0709 {74: 0.0124, 82: 0.0123}
+STAGE3 selected rand21 {'epochs': 200, 'lr': 0.00024948224133192936, 'weight_decay': 2.322377579654619e-06, 'dropout': 0.0, 'batch_size': 16, 'beta': 0.23455467001245875, 'anneal_epochs': 50, 'val_frac': 0.1} {'rand39': 0.06074910955737982, 'rand15': 0.06525578619584163, 'rand21': 0.05994640613928966, 'rand17': 0.07116932319918003, 'rand45': 0.06777516402380993, 'rand19': 0.06413705293752428}
+stage4 rand21 [0.0, 3.1] obj(k3 abs RMSE)=0.0685 {74: 0.017, 82: 0.0118}
+stage4 rand21 [0.0, 5.0] obj(k3 abs RMSE)=0.0835 {74: 0.0123, 82: 0.0124}
+stage4 rand21 [0.0, 10.0] obj(k3 abs RMSE)=0.0598 {74: 0.013, 82: 0.012}
+stage4 rand21 [0.0, 20.0] obj(k3 abs RMSE)=0.0604 {74: 0.0134, 82: 0.0123}
+stage4 rand21 [0.0, None] obj(k3 abs RMSE)=0.0647 {74: 0.0132, 82: 0.0128}
+stage4 rand21 [1.0, 3.1] obj(k3 abs RMSE)=0.0562 {74: 0.0125, 82: 0.0123}
+stage4 rand21 [1.0, 5.0] obj(k3 abs RMSE)=0.0695 {74: 0.0121, 82: 0.012}
+stage4 rand21 [1.0, 10.0] obj(k3 abs RMSE)=0.0693 {74: 0.0131, 82: 0.0115}
+stage4 rand21 [1.0, 20.0] obj(k3 abs RMSE)=0.1242 {74: 0.0143, 82: 0.0131}
+stage4 rand21 [1.0, None] obj(k3 abs RMSE)=0.0603 {74: 0.013, 82: 0.0133}
+stage4 rand21 [2.0, 3.1] obj(k3 abs RMSE)=0.0739 {74: 0.0122, 82: 0.0124}
+stage4 rand21 [2.0, 5.0] obj(k3 abs RMSE)=0.0673 {74: 0.0167, 82: 0.0117}
+stage4 rand21 [2.0, 10.0] obj(k3 abs RMSE)=0.0590 {74: 0.0128, 82: 0.0118}
+stage4 rand21 [2.0, 20.0] obj(k3 abs RMSE)=0.1005 {74: 0.0136, 82: 0.0123}
+stage4 rand21 [2.0, None] obj(k3 abs RMSE)=0.0832 {74: 0.0129, 82: 0.0132}
+stage4 rand21 single obj(k3 abs RMSE)=0.0969 {74: 0.0173, 82: 0.0121}
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+Using user-specified device 'cuda' for Cvae.
+DONE rand21 {'epochs': 200, 'lr': 0.00024948224133192936, 'weight_decay': 2.322377579654619e-06, 'dropout': 0.0, 'batch_size': 16, 'beta': 0.23455467001245875, 'anneal_epochs': 50, 'val_frac': 0.1} window [1.0, 3.1]

@@ -1,0 +1,33 @@
+# Joint cVAE (scripts/joint_cvae.py), snap82 arm: arcmin9_cosmo_kmax10_snap82_nd2/20261002T200709Z__ae415e59__2e53c8d/config_data.yaml
+# with number_density_indices [2] -> null (all 5 number densities) and nothing else.
+# The number density and redshift enter the model as X_cond = [log10 n, z], built
+# by scripts/joint_cvae.py (include_nd_feature stays false here).
+path: null
+project_root: /pscratch/sd/l/lindajin/fgas-to-pk-ml
+suite: CAMELS-IllustrisTNG-L50n512-SB35
+snapshot: 82
+redshift: 0.21
+source: lindajin
+rank: mstar
+tag: 20260930-arcmin-all
+sim_ids: null
+number_density_indices: null
+radial_range_mpch: null
+radial_range_arcmin:
+- 0.0
+- 6.0
+include_nd_feature: false
+include_mean_halo_mass: false
+include_camels_params: true
+camels_param_indices: null
+camels_param_names:
+- Omega0
+- sigma8
+- OmegaBaryon
+- HubbleParam
+- n_s
+target_mode: k_range
+k_target: null
+k_range:
+- 0.0
+- 10.0

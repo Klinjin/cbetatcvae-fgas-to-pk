@@ -268,6 +268,16 @@ class Cvae:
             best-epoch selection (seeded shuffle, ``ceil(val_frac * n)`` rows).
             ``0`` disables validation (train on all rows, keep the final weights).
             Defaults to 0.1.
+        val_grouped (bool): Draw the internal validation holdout by
+            **simulation** (``training_data.sim_index``) instead of by row:
+            ``ceil(val_frac * n_sims)`` seeded-shuffled simulations are held out
+            with all their rows. Needed whenever a simulation contributes several
+            rows that share its SP(k) target (several number densities and/or
+            redshifts), since a row-level holdout then validates on targets the
+            network trains on and best-epoch selection becomes optimistic. With
+            one row per simulation the two schemes hold out the same number of
+            rows. Off (the default) reproduces the row-level holdout exactly.
+            Defaults to False.
         obs_noise_head (bool): Enable the learned per-k observation-noise head:
             a learnable ``obs_logvar`` of shape ``(n_k,)`` turns the
             reconstruction term into a Gaussian NLL and adds seeded observation
@@ -324,6 +334,7 @@ class Cvae:
         beta: float = 1.0,
         anneal_epochs: int | None = None,
         val_frac: float = 0.1,
+        val_grouped: bool = False,
         obs_noise_head: bool = False,
         obs_likelihood: str = "gaussian",
         obs_df: float | None = 5.0,
@@ -347,6 +358,7 @@ class Cvae:
         # quarter of the schedule; a non-positive value disables annealing.
         self.anneal_epochs = epochs // 4 if anneal_epochs is None else anneal_epochs
         self.val_frac = val_frac
+        self.val_grouped = val_grouped
         self.obs_noise_head = obs_noise_head
         if obs_likelihood not in _OBS_LIKELIHOODS:
             raise ValueError(
@@ -436,7 +448,20 @@ class Cvae:
         n_total = X.shape[0]
         n_val = math.ceil(self.val_frac * n_total) if self.val_frac > 0 else 0
         use_val = 0 < n_val < n_total
-        if use_val:
+        if use_val and self.val_grouped:
+            # Hold out whole simulations so no validation target is also trained on.
+            sims = np.unique(np.asarray(training_data.sim_index))
+            n_val_sims = math.ceil(self.val_frac * len(sims))
+            if not 0 < n_val_sims < len(sims):
+                raise ValueError(
+                    f"val_grouped with val_frac={self.val_frac} leaves no "
+                    f"training or validation simulations ({len(sims)} sims)."
+                )
+            val_sims = np.random.default_rng(self.seed).permutation(sims)[:n_val_sims]
+            is_val = np.isin(np.asarray(training_data.sim_index), val_sims)
+            val_rows = np.where(is_val)[0]
+            train_rows = np.where(~is_val)[0]
+        elif use_val:
             shuffled = np.random.default_rng(self.seed).permutation(n_total)
             val_rows = shuffled[:n_val]
             train_rows = shuffled[n_val:]

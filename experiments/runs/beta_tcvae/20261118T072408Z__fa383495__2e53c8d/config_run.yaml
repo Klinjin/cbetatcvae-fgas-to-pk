@@ -1,0 +1,32 @@
+model: beta_tcvae
+model_params:
+  latent_dim: 2
+  hidden: 128
+  n_layers: 2
+  epochs: 200
+  lr: 0.0005
+  weight_decay: 0.0001
+  dropout: 0.0
+  batch_size: 128
+  kl_lambda: 1.0
+  alpha_mi: 1.0
+  beta_tc: 1.0
+  gamma_dwkl: 1.0
+  anneal_epochs: null
+  anneal_cycle_epochs: null
+  use_profile: true
+  val_frac: 0.1
+  val_grouped: true
+  obs_calibrate_on_val: false
+seed: 0
+split:
+  train_frac: 0.7
+  val_frac: 0.1
+  test_frac: 0.2
+  seed: 10
+evaluation:
+  suppressed_thresholds:
+  - 0.95
+  - 0.9
+  - 0.8
+write_root: null

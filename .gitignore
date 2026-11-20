@@ -224,3 +224,6 @@ figures/
 
 Outputs_Perlmutter/
 delete/
+
+# Experiment run outputs (kept out of the git-tracked repo)
+experiments/

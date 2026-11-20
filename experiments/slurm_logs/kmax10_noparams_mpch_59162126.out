@@ -1,0 +1,29 @@
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap74/20261001T153051Z__1b34d520__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap74/20261001T153101Z__1f395ce6__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap74/20261001T153110Z__c2e8b971__2e53c8d
+{
+  "run": "20261001T153110Z__c2e8b971__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07017398181435483,
+    "rmse_median_over_k": 0.05059607293439648,
+    "frac_k_bins_rmse_below_1pct": 0.06329113924050633
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.0819384742844479,
+    "rmse_median_over_k": 0.06559944513812994,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.07213771579964301,
+    "rmse_median_over_k": 0.05980994464387551,
+    "frac_k_bins_rmse_below_1pct": 0.06329113924050633
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.11392405063291139
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/mpch_noparams_kmax10_snap74/20261001T153110Z__c2e8b971__2e53c8d__rmse_vs_k_pub.png

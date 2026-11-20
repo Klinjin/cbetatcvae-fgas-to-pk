@@ -1,0 +1,180 @@
+which: no virtualenvwrapper.sh in (/global/common/software/nersc/pe/conda-envs/26.8.1/python-3.13/nersc-python/bin:/global/common/software/nersc/pe/conda/26.1.0/Miniforge3-25.11.0-1/condabin:/global/homes/l/lindajin/.local/perlmutter/python-3.13/26.8.1/bin:/global/homes/l/lindajin/.local/bin:/global/u1/l/lindajin/.vscode-server/cli/servers/Stable-08d4889f9ec4a1685d257b9b95de036c8e1ce1e5/server/bin/remote-cli:/global/homes/l/lindajin/.nvm/versions/node/v22.19.0/bin:/opt/nersc/pe/bin:/global/common/software/nersc/bin:/global/common/software/nersc9/darshan/default/bin:/global/common/software/nersc9/sqs/2.0/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/compute-sanitizer:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/bin:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/13.2/libnvvp:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Compute:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/profilers/13.2/Nsight_Systems/bin:/opt/cray/pe/perftools/26.03.0/bin:/opt/cray/pe/papi/7.3.0.1/bin:/opt/cray/pe/craype/2.7.36/bin:/opt/cray/pe/mpich/9.1.0/ofi/gnu/12.3/bin:/opt/cray/pe/mpich/9.1.0/bin:/opt/cray/pe/gcc-native/14/bin:/opt/cray/libfabric/2.3.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin)
+/global/homes/l/lindajin/.bashrc: line 4: source: filename argument required
+source: usage: source filename [arguments]
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap74/20261003T181524Z__4921f061__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap74/20261003T181533Z__f85d812b__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap74/20261003T181542Z__f70eaf29__2e53c8d
+{
+  "run": "20261003T181524Z__4921f061__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07494433191939029,
+    "rmse_median_over_k": 0.0543232739775672,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.08761947549363493,
+    "rmse_median_over_k": 0.06865837703433615,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.07391041552952399,
+    "rmse_median_over_k": 0.05823179246188205,
+    "frac_k_bins_rmse_below_1pct": 0.06329113924050633
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.12658227848101267
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/mpch9_noparams_kmax10_snap74/20261003T181524Z__4921f061__2e53c8d__rmse_vs_k_pub.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap82/20261003T181601Z__8cf38971__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap82/20261003T181611Z__9e2bd936__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch9_noparams_kmax10_snap82/20261003T181621Z__e649988e__2e53c8d
+{
+  "run": "20261003T181601Z__8cf38971__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07545267183481748,
+    "rmse_median_over_k": 0.062446581165006426,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.09409318617273715,
+    "rmse_median_over_k": 0.09381588683154943,
+    "frac_k_bins_rmse_below_1pct": 0.0379746835443038
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.07619332241773316,
+    "rmse_median_over_k": 0.07116563403762087,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.11392405063291139
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/mpch9_noparams_kmax10_snap82/20261003T181601Z__8cf38971__2e53c8d__rmse_vs_k_pub.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap82/20261003T181640Z__3be8c995__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap82/20261003T181649Z__c56498e2__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/mpch_noparams_kmax10_snap82/20261003T181658Z__bf7e9049__2e53c8d
+{
+  "run": "20261003T181640Z__3be8c995__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07280822678857682,
+    "rmse_median_over_k": 0.059697735275811944,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.08914746087773862,
+    "rmse_median_over_k": 0.08915717826308135,
+    "frac_k_bins_rmse_below_1pct": 0.0379746835443038
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.07487579172723119,
+    "rmse_median_over_k": 0.0700348814947025,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.08860759493670886
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/mpch_noparams_kmax10_snap82/20261003T181640Z__3be8c995__2e53c8d__rmse_vs_k_pub.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_noparams_kmax10_snap82/20261003T181717Z__b9c0b14a__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_noparams_kmax10_snap82/20261003T181726Z__3e6ff425__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_noparams_kmax10_snap82/20261003T181736Z__2cb10b2f__2e53c8d
+{
+  "run": "20261003T181717Z__b9c0b14a__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07920289086213848,
+    "rmse_median_over_k": 0.06557977676298343,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.09248403609111867,
+    "rmse_median_over_k": 0.09255642306648686,
+    "frac_k_bins_rmse_below_1pct": 0.0379746835443038
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.08286737807616236,
+    "rmse_median_over_k": 0.07866970051663835,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.10126582278481013
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/arcmin_noparams_kmax10_snap82/20261003T181717Z__b9c0b14a__2e53c8d__rmse_vs_k_pub.png
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap82/20261003T181754Z__98361ad4__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap82/20261003T181804Z__f7122aaf__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin_cosmo_kmax10_snap82/20261003T181813Z__9962c20b__2e53c8d
+{
+  "run": "20261003T181754Z__98361ad4__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.03608571173847365,
+    "rmse_median_over_k": 0.025617262349718766,
+    "frac_k_bins_rmse_below_1pct": 0.06329113924050633
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.03038002944228428,
+    "rmse_median_over_k": 0.029644173082263556,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.03237464048268425,
+    "rmse_median_over_k": 0.027872266467501374,
+    "frac_k_bins_rmse_below_1pct": 0.06329113924050633
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.17721518987341772
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/arcmin_cosmo_kmax10_snap82/20261003T181754Z__98361ad4__2e53c8d__rmse_vs_k_pub.png
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax3_snap82/20261003T181830Z__1a721a08__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax3_snap82/20261003T181839Z__a029d37f__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax3_snap82/20261003T181848Z__a50c9b1a__2e53c8d
+{
+  "run": "20261003T181830Z__1a721a08__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.058100955266295475,
+    "rmse_median_over_k": 0.035697749621698575,
+    "frac_k_bins_rmse_below_1pct": 0.17391304347826086
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.07893367634369612,
+    "rmse_median_over_k": 0.05179931846507302,
+    "frac_k_bins_rmse_below_1pct": 0.13043478260869565
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.06758003503645109,
+    "rmse_median_over_k": 0.04553077482730915,
+    "frac_k_bins_rmse_below_1pct": 0.17391304347826086
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.391304347826087
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-03/arcmin9_noparams_kmax3_snap82/20261003T181830Z__1a721a08__2e53c8d__rmse_vs_k_pub.png

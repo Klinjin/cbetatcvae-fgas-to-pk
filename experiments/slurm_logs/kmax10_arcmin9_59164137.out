@@ -1,0 +1,67 @@
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax10_snap74/20261001T163910Z__1b4c69c2__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax10_snap74/20261001T163919Z__22ea196c__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_noparams_kmax10_snap74/20261001T163927Z__5aae7d51__2e53c8d
+{
+  "run": "20261001T163927Z__5aae7d51__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.07850780066424155,
+    "rmse_median_over_k": 0.06058557346237027,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.08884640202249433,
+    "rmse_median_over_k": 0.07953659199582089,
+    "frac_k_bins_rmse_below_1pct": 0.0379746835443038
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.08063274952083799,
+    "rmse_median_over_k": 0.06851623691125604,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.10126582278481013
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/arcmin9_noparams_kmax10_snap74/20261001T163927Z__5aae7d51__2e53c8d__rmse_vs_k_pub.png
+moved figures for 1b4c69c2 -> figures/2026-10/10-01/arcmin9_noparams_kmax10_snap74
+moved figures for 22ea196c -> figures/2026-10/10-01/arcmin9_noparams_kmax10_snap74
+moved figures for 5aae7d51 -> figures/2026-10/10-01/arcmin9_noparams_kmax10_snap74
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+Using CAMELS parameters (X_params) in Cvae.fit.
+Using CUDA device for Cvae.
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap74/20261001T163947Z__6399848f__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap74/20261001T163956Z__b38cad17__2e53c8d
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/experiments/runs/arcmin9_cosmo_kmax10_snap74/20261001T164005Z__2571eee1__2e53c8d
+{
+  "run": "20261001T164005Z__2571eee1__2e53c8d",
+  "train": {
+    "n": 717,
+    "rmse_k_max": 0.04162091302993872,
+    "rmse_median_over_k": 0.021685988565043966,
+    "frac_k_bins_rmse_below_1pct": 0.0759493670886076
+  },
+  "val": {
+    "n": 102,
+    "rmse_k_max": 0.05348832379033998,
+    "rmse_median_over_k": 0.03508823171139531,
+    "frac_k_bins_rmse_below_1pct": 0.05063291139240506
+  },
+  "test": {
+    "n": 205,
+    "rmse_k_max": 0.03838987040913838,
+    "rmse_median_over_k": 0.025658051739937675,
+    "frac_k_bins_rmse_below_1pct": 0.0759493670886076
+  },
+  "frac_k_bins_test_16_84_within_1pct": 0.20253164556962025
+}
+/pscratch/sd/l/lindajin/fgas-to-pk-ml/figures/2026-10/10-01/arcmin9_cosmo_kmax10_snap74/20261001T164005Z__2571eee1__2e53c8d__rmse_vs_k_pub.png
+moved figures for 6399848f -> figures/2026-10/10-01/arcmin9_cosmo_kmax10_snap74
+moved figures for b38cad17 -> figures/2026-10/10-01/arcmin9_cosmo_kmax10_snap74
+moved figures for 2571eee1 -> figures/2026-10/10-01/arcmin9_cosmo_kmax10_snap74

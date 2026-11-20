@@ -167,9 +167,13 @@ without explicit permission*):
   binning code must preserve that fix. The compiled fast path
   (`build_fgas_spk_from_compiled`) inherits the frozen, uncorrected ordering by
   design — use it only for quick iteration.
-- **`rank_key="stellar"` is stubbed.** `SubhaloMStar` is not saved by the
-  producer; stellar-mass ranking (the observationally-matched choice) needs a
-  catalogue re-read and currently raises. Default is `halo_mass` (M_500c).
+- **`rank_key="stellar"` needs eighth-gen (or later) products.** From
+  `test_CAMELS_eighth_gen.ipynb` on, the producer saves per-halo
+  `stellar_masses` (stored descending) and writes `*_mpch2_*` rather than
+  `*_kpch2_*` ΔΣ keys; the builder reads either area variant (the factor
+  cancels in f_gas) and ranks by the saved stellar mass (on-disk rank token
+  `mstar`). On older products `rank_key="stellar"` raises. Default is still
+  `halo_mass` (M_500c); `mean_halo_mass` is M_500c under either ranking.
 - **Generation / provenance.** Source files must be the three-profile products
   (`prof2_ionized_gas_*` present). The reference notebook never executed its
   `NAME_EXTRA` cell, so older on-disk products may be mis-stamped; the loader

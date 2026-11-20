@@ -32,6 +32,7 @@ number_density_indices: [2]    # single number density; one row per simulation
 # where the stacked Delta Sigma_total denominator legitimately decays toward
 # zero. The boundary value 10 is preliminary and maintainer-owned.
 radial_range_mpch: [0.0, 10.0]
+radial_range_arcmin: null   # arcmin-design datasets only: 6 = bins <= 6 arcmin (9 bins); null = all bins
 include_nd_feature: false      # nd is constant across rows here; no X_cond
 include_mean_halo_mass: false
 include_camels_params: true    # 5 cosmological params -> X_params (decision F0.4)
